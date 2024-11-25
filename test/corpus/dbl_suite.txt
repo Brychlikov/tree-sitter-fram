@@ -319,14 +319,23 @@ let _ = D (C B)
 
 =====
 ok0016_trivialMatch.fram
-:skip
 =====
 let _ =
   match fn x => x with
   | f => f
   end ()
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_let
+      (wildcard)
+      (ex_app
+        (ex_match
+          (ex_fn (lid) (lid))
+          (match_clause
+            (lid)
+            (lid)))
+        (ctor_unit)))))
 
 =====
 ok0017_wildcard.fram
@@ -539,23 +548,57 @@ let _ = tauto ()
 
 =====
 ok0031_explicitArg.fram
-:skip
 =====
 let ~f {~x} = ~x
 let f {~f=g} = g
 let h ~x = f ()
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_let
+      (ex_app
+        (tlid)
+        (ex_record
+          (fld_name (tlid))))
+      (tlid))
+    (def_let 
+      (ex_app
+        (lid)
+        (ex_record
+          (fld_nameval
+            (tlid)
+            (lid))))
+      (lid))
+    (def_let
+      (ex_app 
+        (lid)
+        (tlid))
+      (ex_app
+        (lid)
+        (ctor_unit)))))
+
 
 =====
 ok0032_dataArg.fram
-:skip
 =====
 data Option X =
 | None
 | Some of X
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_data
+      (ty_expr_app
+        (uid_path
+          (uid))
+        (uid_path
+          (uid)))
+      (ctor_decl
+        (uid))
+      (ctor_decl
+        (uid)
+        (uid_path
+          (uid))))))
 
 =====
 ok0033_higherKinds.fram

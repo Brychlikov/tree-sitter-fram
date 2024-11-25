@@ -23,6 +23,9 @@
           buildInputs = with pkgs; [
             tree-sitter nodejs_20 graphviz
           ];
+          shellHook = ''
+            alias ts=tree-sitter
+          '';
         };
       }
     );

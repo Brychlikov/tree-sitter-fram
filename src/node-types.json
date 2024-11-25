@@ -1,5 +1,25 @@
 [
   {
+    "type": "block_comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "comment_text",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "ctor_decl",
     "named": true,
     "fields": {},
@@ -32,7 +52,15 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -71,7 +99,15 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -119,6 +155,14 @@
         },
         {
           "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
           "named": true
         },
         {
@@ -212,6 +256,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -298,6 +350,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -361,6 +421,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -417,6 +485,14 @@
         },
         {
           "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
           "named": true
         },
         {
@@ -487,6 +563,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -543,6 +627,14 @@
         },
         {
           "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
           "named": true
         },
         {
@@ -609,6 +701,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -622,6 +722,449 @@
         },
         {
           "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_match",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "match_clause",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fld_anontype",
+          "named": true
+        },
+        {
+          "type": "fld_effect",
+          "named": true
+        },
+        {
+          "type": "fld_effectval",
+          "named": true
+        },
+        {
+          "type": "fld_module",
+          "named": true
+        },
+        {
+          "type": "fld_name",
+          "named": true
+        },
+        {
+          "type": "fld_nameannot",
+          "named": true
+        },
+        {
+          "type": "fld_nameval",
+          "named": true
+        },
+        {
+          "type": "fld_type",
+          "named": true
+        },
+        {
+          "type": "fld_typeval",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_anontype",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_effect",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "fld_effectval",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_module",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "qlid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_nameannot",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "qlid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_nameval",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "qlid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fld_typeval",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "uid_path",
           "named": true
         }
       ]
@@ -665,6 +1208,14 @@
         },
         {
           "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
           "named": true
         },
         {
@@ -727,6 +1278,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -766,11 +1325,158 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
           "named": true
         },
         {
+          "type": "ty_record",
+          "named": true
+        },
+        {
           "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_path_abs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_path_rel",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "imprt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "import_path_abs",
+          "named": true
+        },
+        {
+          "type": "import_path_rel",
+          "named": true
+        },
+        {
+          "type": "open",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "match_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "lid",
           "named": true
         }
       ]
@@ -817,6 +1523,14 @@
           "named": true
         },
         {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
           "type": "lid",
           "named": true
         },
@@ -841,11 +1555,15 @@
     "root": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "def_list",
+          "named": true
+        },
+        {
+          "type": "imprt",
           "named": true
         }
       ]
@@ -876,7 +1594,15 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -907,7 +1633,15 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -938,7 +1672,15 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -969,7 +1711,54 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_expr_effect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -983,6 +1772,276 @@
     "type": "ty_expr_wildcard",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "ty_fld_anontype",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_fld_effect",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ty_fld_effectval",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_fld_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "qlid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_fld_nameval",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        },
+        {
+          "type": "qlid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_fld_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_fld_typeval",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_fld_anontype",
+          "named": true
+        },
+        {
+          "type": "ty_fld_effect",
+          "named": true
+        },
+        {
+          "type": "ty_fld_effectval",
+          "named": true
+        },
+        {
+          "type": "ty_fld_name",
+          "named": true
+        },
+        {
+          "type": "ty_fld_nameval",
+          "named": true
+        },
+        {
+          "type": "ty_fld_type",
+          "named": true
+        },
+        {
+          "type": "ty_fld_typeval",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "type_annot",
@@ -1005,7 +2064,15 @@
           "named": true
         },
         {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
           "named": true
         },
         {
@@ -1040,7 +2107,15 @@
     "named": false
   },
   {
+    "type": "(*",
+    "named": false
+  },
+  {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "*)",
     "named": false
   },
   {
@@ -1088,6 +2163,10 @@
     "named": false
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "ctor_nil",
     "named": true
   },
@@ -1101,6 +2180,10 @@
   },
   {
     "type": "effect",
+    "named": false
+  },
+  {
+    "type": "end",
     "named": false
   },
   {
@@ -1120,8 +2203,16 @@
     "named": false
   },
   {
+    "type": "import",
+    "named": false
+  },
+  {
     "type": "in",
     "named": false
+  },
+  {
+    "type": "label",
+    "named": true
   },
   {
     "type": "let",
@@ -1132,6 +2223,18 @@
     "named": true
   },
   {
+    "type": "match",
+    "named": false
+  },
+  {
+    "type": "method",
+    "named": false
+  },
+  {
+    "type": "module",
+    "named": false
+  },
+  {
     "type": "of",
     "named": false
   },
@@ -1140,8 +2243,16 @@
     "named": true
   },
   {
+    "type": "open",
+    "named": true
+  },
+  {
     "type": "pub",
     "named": false
+  },
+  {
+    "type": "qlid",
+    "named": true
   },
   {
     "type": "rec",
@@ -1156,8 +2267,16 @@
     "named": true
   },
   {
+    "type": "type",
+    "named": false
+  },
+  {
     "type": "uid",
     "named": true
+  },
+  {
+    "type": "with",
+    "named": false
   },
   {
     "type": "{",

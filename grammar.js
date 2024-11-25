@@ -12,9 +12,14 @@ module.exports = grammar({
 
   word: $ => $.lid,
 
+  extras: $ => [
+    $.block_comment,
+    /\s/,
+  ],
+
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => optional($.def_list),
+    source_file: $ => seq(repeat($.imprt), optional($.def_list)),
     _digit: $ => /[0-9]/,
     _lid_start: $ => /[a-z_]/,
     _uid_start: $ => /[A-Z]/,
@@ -30,6 +35,24 @@ module.exports = grammar({
     // TODO: escapes
     str: _ => /".*"/,
     chr: _ => /'.'/,
+
+    // comment: _ => /\(\*.*(\n.*)*.*\*\)/,
+    block_comment: $ => seq(
+      "(*",
+      optional($.comment_text),
+      "*)"
+    ),
+    comment_text: $ => repeat1(/.|\n|\r/),
+
+    _name: $ => choice(
+      $.label, 
+      $.lid,
+      $.qlid,
+      $.tlid,
+      $.method,
+    ),
+    label: $ => "label",
+    method: $ => seq("method", $.lid),
 
     def_list: $ => repeat1($._def),
     _def: $ => prec.left(11, choice( 
@@ -49,6 +72,15 @@ module.exports = grammar({
     def_handle: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "=", $._expr, repeat($._h_clause)),
 
     def_implicit: $ => seq("implicit", $.tlid, optional($.implicit_ty_args), optional($.type_annot)),
+
+    import_path_rel: $ => seq($.uid, repeat(seq("/", $.uid))),
+    import_path_abs: $ => seq("/", $.uid, repeat(seq("/", $.uid))),
+    _import_path: $ => choice($.import_path_abs, $.import_path_rel),
+
+    open: $ => "open",
+    imprt: $ => seq("import", optional($.open), $._import_path, optional(seq("as", $.uid))),
+
+
     implicit_ty_args: $ => seq("{", repeat1($._ty_expr), "}"),
     type_annot: $ => seq(":", $._ty_expr),
 
@@ -81,7 +113,10 @@ module.exports = grammar({
       $.ty_expr_arr,
       $._ty_expr_simple,
       $.ty_expr_app,
+      $.ty_expr_effect,
     ),
+
+    ty_expr_effect: $ => seq("effect", $._ty_expr_simple),
 
     uid_path: $ => seq($.uid, repeat(seq(".", $.uid))),
 
@@ -93,7 +128,7 @@ module.exports = grammar({
       $.uid_path,
       // $.ty_kind_annot,
       $.ty_effect,
-      // $.ty_record,
+      $.ty_record,
     ),
 
     ty_effect: $ => seq(
@@ -107,6 +142,27 @@ module.exports = grammar({
 
     ty_expr_wildcard: _ => "_",
     wildcard: _ => "_",
+
+    ty_record: $ => seq("{", $._ty_field, repeat(seq(",", $._ty_field)), "}"),
+
+    _ty_field: $ => choice(
+      $.ty_fld_anontype,
+      $.ty_fld_effect,
+      $.ty_fld_effectval,
+      $.ty_fld_type,
+      $.ty_fld_typeval,
+      $.ty_fld_name,
+      $.ty_fld_nameval,
+    ),
+
+    ty_fld_anontype: $ => seq("type", $._ty_expr),
+    ty_fld_effect: $ => "effect",
+    ty_fld_effectval: $ => seq("effect", "=", $._ty_expr),
+    // ty_fld_type: $ => choice($.uid, /* TODO: kind expressions */),
+    ty_fld_type: $ => $.uid,
+    ty_fld_typeval: $ => seq($.uid, "=", $._ty_expr),
+    ty_fld_name: $ => $._name,
+    ty_fld_nameval: $ => seq($._name, ":", $._ty_expr),
 
 
 
@@ -134,9 +190,9 @@ module.exports = grammar({
       $.ctor_unit,
       seq("(", $._expr, ")"),
       // $.ex_list,
-      // $.ex_match,
+      $.ex_match,
+      $.ex_record,
       // $.ex_handler,
-      // $.ex_record,
       // seq("(", $.op, ")"),
       // seq("(", $.op, ".)"),
 
@@ -154,8 +210,42 @@ module.exports = grammar({
     ex_effect: $ => prec.right(1 ,seq("effect", repeat($._expr), optional($.resumption), "=>", $._expr)),
     ex_def_list: $ => prec.right(1, seq($.def_list, "in", $._expr)),
 
+    ex_match: $ => seq(
+      "match", 
+      $._expr, 
+      "with", 
+      optional(seq(
+        optional("|"), 
+        $.match_clause, 
+        repeat(seq("|", $.match_clause)))
+      ), 
+      "end"
+    ),
 
+    match_clause: $ => seq($._expr, "=>", $._expr),
 
+    ex_record: $ => seq("{", $._field, repeat(seq(",", $._field)), "}"),
 
+    _field: $ => choice(
+      $.fld_anontype,
+      $.fld_effect,
+      $.fld_effectval,
+      $.fld_type,
+      $.fld_typeval,
+      $.fld_name,
+      $.fld_nameval,
+      $.fld_nameannot,
+      $.fld_module,
+    ),
+    fld_anontype: $ => seq("type", $._ty_expr),
+    fld_effect: $ => "effect",
+    fld_effectval: $ => seq("effect", "=", $._ty_expr),
+    // fld_type: $ => choice($.uid, /* TODO: kind expressions */),
+    fld_type: $ => $.uid,
+    fld_typeval: $ => seq($.uid, "=", $._ty_expr),
+    fld_name: $ => $._name,
+    fld_nameval: $ => seq($._name, "=", $._expr),
+    fld_nameannot: $ => seq($._name, ":", $._ty_expr),
+    fld_module: $ => seq("module", $.uid),
   }
 });

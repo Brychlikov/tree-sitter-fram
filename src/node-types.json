@@ -1,0 +1,1174 @@
+[
+  {
+    "type": "ctor_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "op",
+          "named": true
+        },
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_decl",
+          "named": true
+        },
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_handle",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "h_finally",
+          "named": true
+        },
+        {
+          "type": "h_return",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_implicit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "implicit_ty_args",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "type_annot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_let",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "def_data",
+          "named": true
+        },
+        {
+          "type": "def_handle",
+          "named": true
+        },
+        {
+          "type": "def_implicit",
+          "named": true
+        },
+        {
+          "type": "def_let",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_annot",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "type_annot",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_app",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_binop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "op",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_def_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "def_list",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_effect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "resumption",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_fn",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "h_finally",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "h_return",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "implicit_ty_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "resumption",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "def_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_effect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_effect_row",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_effect_row",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_expr_app",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_expr_arr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_expr_wildcard",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "type_annot",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "uid_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "wildcard",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "->",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": ".)",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "=>",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "ctor_nil",
+    "named": true
+  },
+  {
+    "type": "ctor_unit",
+    "named": true
+  },
+  {
+    "type": "data",
+    "named": false
+  },
+  {
+    "type": "effect",
+    "named": false
+  },
+  {
+    "type": "finally",
+    "named": false
+  },
+  {
+    "type": "fn",
+    "named": false
+  },
+  {
+    "type": "handle",
+    "named": false
+  },
+  {
+    "type": "implicit",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
+    "type": "let",
+    "named": false
+  },
+  {
+    "type": "lid",
+    "named": true
+  },
+  {
+    "type": "of",
+    "named": false
+  },
+  {
+    "type": "op",
+    "named": true
+  },
+  {
+    "type": "pub",
+    "named": false
+  },
+  {
+    "type": "rec",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
+    "type": "tlid",
+    "named": true
+  },
+  {
+    "type": "uid",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]

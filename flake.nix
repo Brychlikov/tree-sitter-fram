@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
   };
 
@@ -21,7 +21,8 @@
 
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            (tree-sitter.override {webUISupport = true;})
+            # (tree-sitter.override {webUISupport = true;})
+            tree-sitter
             nodejs_20 graphviz
           ];
           shellHook = ''

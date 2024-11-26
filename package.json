@@ -50,7 +50,11 @@
   "tree-sitter": [
     {
       "scope": "source.fram",
-      "injection-regex": "^fram$"
+      "injection-regex": "^fram$",
+      "file-types": ["fram"],
+      "highlights": [
+        "queries/highlights.scm"
+      ]
     }
   ]
 }

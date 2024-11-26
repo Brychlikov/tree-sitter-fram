@@ -126,6 +126,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -178,6 +182,18 @@
           "named": true
         },
         {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
+          "named": true
+        },
+        {
           "type": "tlid",
           "named": true
         },
@@ -224,6 +240,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -265,6 +285,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -318,6 +350,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -359,6 +395,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -389,6 +437,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -430,6 +482,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -456,6 +520,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -500,7 +568,19 @@
           "named": true
         },
         {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
           "type": "op",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -526,6 +606,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "chr",
+          "named": true
+        },
         {
           "type": "ctor_nil",
           "named": true
@@ -575,6 +659,18 @@
           "named": true
         },
         {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
+          "named": true
+        },
+        {
           "type": "tlid",
           "named": true
         },
@@ -597,6 +693,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "chr",
+          "named": true
+        },
         {
           "type": "ctor_nil",
           "named": true
@@ -642,7 +742,19 @@
           "named": true
         },
         {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
           "type": "resumption",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -669,6 +781,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -713,6 +829,18 @@
           "named": true
         },
         {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
+          "named": true
+        },
+        {
           "type": "tlid",
           "named": true
         },
@@ -735,6 +863,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "chr",
+          "named": true
+        },
         {
           "type": "ctor_nil",
           "named": true
@@ -781,6 +913,18 @@
         },
         {
           "type": "match_clause",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -1042,6 +1186,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -1094,7 +1242,19 @@
           "named": true
         },
         {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
           "type": "qlid",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -1179,6 +1339,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -1220,6 +1384,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -1246,6 +1422,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -1287,6 +1467,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -1409,6 +1601,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -1450,6 +1646,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -1491,6 +1699,10 @@
       "required": true,
       "types": [
         {
+          "type": "chr",
+          "named": true
+        },
+        {
           "type": "ctor_nil",
           "named": true
         },
@@ -1532,6 +1744,18 @@
         },
         {
           "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         },
         {
@@ -2167,6 +2391,10 @@
     "named": false
   },
   {
+    "type": "chr",
+    "named": true
+  },
+  {
     "type": "ctor_nil",
     "named": true
   },
@@ -2235,6 +2463,14 @@
     "named": false
   },
   {
+    "type": "num",
+    "named": true
+  },
+  {
+    "type": "num64",
+    "named": true
+  },
+  {
     "type": "of",
     "named": false
   },
@@ -2261,6 +2497,10 @@
   {
     "type": "return",
     "named": false
+  },
+  {
+    "type": "str",
+    "named": true
   },
   {
     "type": "tlid",

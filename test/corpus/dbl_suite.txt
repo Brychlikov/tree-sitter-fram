@@ -1060,7 +1060,6 @@ let _ = foo (fn id => id id A)
 
 =====
 ok0066_method.fram
-:skip
 =====
 data Vec T = Vec of { x : T, y : T }
 

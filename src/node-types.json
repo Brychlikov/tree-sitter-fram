@@ -337,6 +337,97 @@
         {
           "type": "def_let",
           "named": true
+        },
+        {
+          "type": "def_method",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "chr",
+          "named": true
+        },
+        {
+          "type": "ctor_nil",
+          "named": true
+        },
+        {
+          "type": "ctor_unit",
+          "named": true
+        },
+        {
+          "type": "ex_annot",
+          "named": true
+        },
+        {
+          "type": "ex_app",
+          "named": true
+        },
+        {
+          "type": "ex_binop",
+          "named": true
+        },
+        {
+          "type": "ex_def_list",
+          "named": true
+        },
+        {
+          "type": "ex_effect",
+          "named": true
+        },
+        {
+          "type": "ex_fn",
+          "named": true
+        },
+        {
+          "type": "ex_match",
+          "named": true
+        },
+        {
+          "type": "ex_record",
+          "named": true
+        },
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "num64",
+          "named": true
+        },
+        {
+          "type": "str",
+          "named": true
+        },
+        {
+          "type": "tlid",
+          "named": true
+        },
+        {
+          "type": "uid",
+          "named": true
+        },
+        {
+          "type": "var_id",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
         }
       ]
     }
@@ -2316,6 +2407,25 @@
       "types": [
         {
           "type": "uid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "var_id",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "lid",
+          "named": true
+        },
+        {
+          "type": "op",
           "named": true
         }
       ]

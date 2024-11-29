@@ -62,8 +62,19 @@ module.exports = grammar({
       // $.def_label,
       $.def_handle,
       $.def_implicit,
+      $.def_method,
       // TODO: others
     )),
+
+    var_id: $ => prec(2, choice(
+      $.lid,
+      seq("(", $.op, optional("."), ")")
+    )),
+
+    def_method: $ => choice(
+      seq(optional("pub"), "method", optional("rec"), $._expr, "=", $._expr),
+      seq(optional("pub"), "method", "fn", $.var_id, optional(seq("=", $.var_id))),
+    ),
 
     def_let: $ => prec.left(11, seq(optional("pub"), "let", optional("rec"), $._expr,  "=", $._expr)),
 

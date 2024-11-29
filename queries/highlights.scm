@@ -38,3 +38,6 @@
   . (lid) @variable)
 (def_let
   . (ex_app . (lid) @function))
+
+(def_method . (lid) @function.method)
+(def_method . (ex_app . (lid) @function.method))

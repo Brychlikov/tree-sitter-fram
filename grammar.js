@@ -14,8 +14,10 @@ module.exports = grammar({
 
   extras: $ => [
     $.block_comment,
+    $.test_comment,
     /\s/,
   ],
+
 
   rules: {
     // TODO: add the actual grammar rules
@@ -44,6 +46,8 @@ module.exports = grammar({
     ),
     comment_text: $ => repeat1(/.|\n|\r/),
 
+    test_comment: $ => /\/\/.*\n/,
+
     _name: $ => choice(
       $.label, 
       $.lid,
@@ -57,13 +61,16 @@ module.exports = grammar({
     def_list: $ => repeat1($._def),
     _def: $ => prec.left(11, choice( 
       $.def_let,
+      $.def_implicit,
       $.def_data,
-      // $.def_data_record,
+      $.def_data_record,
       // $.def_label,
       $.def_handle,
-      $.def_implicit,
+      $.def_handle_with,
       $.def_method,
-      // TODO: others
+      $.def_module,
+      $.def_rec,
+      $.def_open,
     )),
 
     var_id: $ => prec(2, choice(
@@ -71,16 +78,27 @@ module.exports = grammar({
       seq("(", $.op, optional("."), ")")
     )),
 
+    def_rec: $ => seq("rec", $.def_list, "end"),
+
     def_method: $ => choice(
       seq(optional("pub"), "method", optional("rec"), $._expr, "=", $._expr),
       seq(optional("pub"), "method", "fn", $.var_id, optional(seq("=", $.var_id))),
     ),
 
+    def_module: $ => seq(optional("pub"), "module", optional("rec"), $.uid, $.def_list, "end"),
+
+    def_open: $ => seq(optional("pub"), "open", $.uid_path),
+
     def_let: $ => prec.left(11, seq(optional("pub"), "let", optional("rec"), $._expr,  "=", $._expr)),
 
-    def_data: $ => seq("data", optional("rec"), $._ty_expr, "=", optional("|"), optional($._ctor_decls1)),
+    def_data: $ => seq(optional($.data_vis), "data", optional("rec"), $._ty_expr, "=", optional("|"), optional($._ctor_decls1)),
+
+    def_data_record: $ => seq(optional($.data_vis), "data", optional("rec"), $._ty_expr, "=", $.ty_record),
+    data_vis: $ => prec(2, choice("pub", "abstr")),
 
     def_handle: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "=", $._expr, repeat($._h_clause)),
+
+    def_handle_with: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "with", $._expr),
 
     def_implicit: $ => seq("implicit", $.tlid, optional($.implicit_ty_args), optional($.type_annot)),
 
@@ -125,11 +143,14 @@ module.exports = grammar({
       $._ty_expr_simple,
       $.ty_expr_app,
       $.ty_expr_effect,
+      $.ty_expr_type,
     ),
 
     ty_expr_effect: $ => seq("effect", $._ty_expr_simple),
+    ty_expr_type: $ => seq("type", $._ty_expr_simple),
 
     uid_path: $ => seq($.uid, repeat(seq(".", $.uid))),
+
 
     ty_expr_arr: $ => prec.right(1, seq($._ty_expr, "->", $._ty_expr)),
     ty_expr_app: $ => prec.left(9, seq($._ty_expr, $._ty_expr)),
@@ -141,6 +162,8 @@ module.exports = grammar({
       $.ty_effect,
       $.ty_record,
     ),
+
+    ex_handler: $ => seq("handler", $._expr, repeat($._h_clause), "end"),
 
     ty_effect: $ => seq(
       "[",
@@ -182,11 +205,20 @@ module.exports = grammar({
       $.ex_fn,
       $.ex_effect,
       $.ex_binop,
+      $.ex_unop,
       $.ex_annot,
       $.ex_app,
       $._ex_simple,
+      $.ex_if,
+      $.ex_if_no_else,
+      $.ex_extern,
       // TODO: others
     ),
+
+    ex_if: $ => prec(2,seq("if", $._expr, "then", $._expr, "else", $._expr)),
+    ex_if_no_else: $ => seq("if", $._expr, "then", $._expr),
+    ex_pub: $ => seq( "pub", $._expr), 
+    ex_extern: $ => seq("extern", $.lid),
 
     _ex_simple: $ => choice(
       $.lid,
@@ -200,25 +232,30 @@ module.exports = grammar({
       $.ctor_nil,
       $.ctor_unit,
       seq("(", $._expr, ")"),
-      // $.ex_list,
+      $.ex_list,
       $.ex_match,
       $.ex_record,
-      // $.ex_handler,
-      // seq("(", $.op, ")"),
-      // seq("(", $.op, ".)"),
+      $.ex_handler,
+      seq("(", $.op, ")"),
+      seq("(", $.op, ".)"),
+      // TODO not ready for that can of worms
+      // $.ex_pub, 
 
     ),
+
+    ex_list: $ => seq("[", $._expr, repeat(seq(",", $._expr)), optional(","), "]"),
 
     _ex_ctor: $ => $.uid,
 
     ex_binop: $ => prec.left(1, seq($._expr, $.op, $._expr)),
+    ex_unop: $ => prec(9, seq($.op, $._expr)),
     ex_fn: $ => prec.right(1, seq("fn", repeat1($._expr), "=>", prec.left(1, $._expr))),
-    ex_annot: $ => seq($._expr, $.type_annot),
+    ex_annot: $ => prec(3, seq($._expr, $.type_annot)),
 
     ex_app: $ => prec.right(9, seq($._ex_simple, repeat1($._ex_simple))),
 
     resumption: $ => seq("/", $._expr),
-    ex_effect: $ => prec.right(1 ,seq("effect", repeat($._expr), optional($.resumption), "=>", $._expr)),
+    ex_effect: $ => prec.right(2 ,seq("effect", repeat($._expr), optional($.resumption), "=>", $._expr)),
     ex_def_list: $ => prec.right(1, seq($.def_list, "in", $._expr)),
 
     ex_match: $ => seq(

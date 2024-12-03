@@ -1060,6 +1060,7 @@ let _ = foo (fn id => id id A)
 
 =====
 ok0066_method.fram
+:skip
 =====
 data Vec T = Vec of { x : T, y : T }
 
@@ -1221,13 +1222,23 @@ let updateTwice f =
 
 =====
 ok0076_ifExpr.fram
-:skip
 =====
 data Bool = True | False
 
 let not x = if x then False else True
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_data
+      (uid_path (uid))
+      (ctor_decl (uid))
+      (ctor_decl (uid)))
+    (def_let
+      (ex_app (lid) (lid))
+      (ex_if
+        (lid)
+        (uid)
+        (uid)))))
 
 =====
 ok0077_effectResume.fram

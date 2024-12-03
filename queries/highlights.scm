@@ -3,14 +3,14 @@
 "data"     @keyword
 "effect"   @keyword
 ;"effrow"   @keyword
-;"else"     @keyword
+"else"     @keyword
 "end"      @keyword
 ;"extern"   @keyword
 "finally"  @keyword
 "fn"       @keyword
 "handle"   @keyword
 ;"handler"  @keyword
-;"if"       @keyword
+"if"       @keyword
 "implicit" @keyword
 "import"   @keyword
 "in"       @keyword
@@ -37,7 +37,9 @@
 (def_let
   . (lid) @variable)
 (def_let
-  . (ex_app . (lid) @function))
+  . (ex_app . (lid) @function
+              [(lid) @variable.parameter
+              (ex_annot (lid) @variable.parameter)]*))
 
 (def_method . (lid) @function.method)
 (def_method . (ex_app . (lid) @function.method))

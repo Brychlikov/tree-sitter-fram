@@ -20,171 +20,873 @@
 <body>
 
 <table>
-<tr><td class=line-number>1</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* This example demonstrates the use of effect handlers </span>
+<tr><td class=line-number>1</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* This file is part of DBL, released under MIT license.</span>
 </td></tr>
-<tr><td class=line-number>2</td><td class=line><span style='font-style: italic;color: #8a8a8a'>  to implement a backtracking search for Pythagorean triples. *)</span>
+<tr><td class=line-number>2</td><td class=line><span style='font-style: italic;color: #8a8a8a'> * See LICENSE for details.</span>
 </td></tr>
-<tr><td class=line-number>3</td><td class=line>
+<tr><td class=line-number>3</td><td class=line><span style='font-style: italic;color: #8a8a8a'> *)</span>
 </td></tr>
-<tr><td class=line-number>4</td><td class=line><span style='color: #5f00d7'>import</span> List
+<tr><td class=line-number>4</td><td class=line>
 </td></tr>
-<tr><td class=line-number>5</td><td class=line>
+<tr><td class=line-number>5</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>isEmpty</span> <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>6</td><td class=line><span style='color: #5f00d7'>data</span> <span style='color: #005f5f'>Triples</span> = Triple <span style='color: #5f00d7'>of</span> <span style='color: #005f5f'>Int</span>, <span style='color: #005f5f'>Int</span>, <span style='color: #005f5f'>Int</span>
+<tr><td class=line-number>6</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>7</td><td class=line>
+<tr><td class=line-number>7</td><td class=line>  | [] =&gt; True
 </td></tr>
-<tr><td class=line-number>8</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* The standard backtracking effect. *)</span>
+<tr><td class=line-number>8</td><td class=line>  | <span style='color: #5f00d7'>_</span>  =&gt; False
 </td></tr>
-<tr><td class=line-number>9</td><td class=line><span style='color: #5f00d7'>data</span> <span style='color: #005f5f'>BT</span> (<span style='color: #5f00d7'>effect</span> <span style='color: #005f5f'>E</span>) = BT <span style='color: #5f00d7'>of</span>
+<tr><td class=line-number>9</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>10</td><td class=line>  { flip : <span style='color: #005f5f'>Unit</span> -&gt;[<span style='color: #005f5f'>E</span>] <span style='color: #005f5f'>Bool</span>
+<tr><td class=line-number>10</td><td class=line>
 </td></tr>
-<tr><td class=line-number>11</td><td class=line>  , fail : {<span style='color: #5f00d7'>type</span> <span style='color: #005f5f'>X</span>} -&gt; <span style='color: #005f5f'>Unit</span> -&gt;[<span style='color: #005f5f'>E</span>] <span style='color: #005f5f'>X</span>
+<tr><td class=line-number>11</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>length</span> <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>12</td><td class=line>  }
+<tr><td class=line-number>12</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>lengthAux</span> <span style='text-decoration: underline;'>xs</span> (res : <span style='color: #005f5f'>Int</span>) =
 </td></tr>
-<tr><td class=line-number>13</td><td class=line>
+<tr><td class=line-number>13</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>14</td><td class=line>method flip {E, self = BT { flip } : <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E</span>} = flip
+<tr><td class=line-number>14</td><td class=line>    | []      =&gt; res
 </td></tr>
-<tr><td class=line-number>15</td><td class=line><span style='color: #5f00d7'>method</span> fail {E, self = BT { fail } : <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E</span>} = fail
+<tr><td class=line-number>15</td><td class=line>    | x :: xs =&gt; lengthAux xs (res + <span style='font-weight: bold;color: #875f00'>1</span>)
 </td></tr>
-<tr><td class=line-number>16</td><td class=line>
+<tr><td class=line-number>16</td><td class=line>    <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>17</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* The method `choose` on `BT` non-deterministically selects a number</span>
+<tr><td class=line-number>17</td><td class=line>  <span style='color: #5f00d7'>in</span> lengthAux xs <span style='font-weight: bold;color: #875f00'>0</span>
 </td></tr>
-<tr><td class=line-number>18</td><td class=line><span style='font-style: italic;color: #8a8a8a'>  from a given range. *)</span>
+<tr><td class=line-number>18</td><td class=line>
 </td></tr>
-<tr><td class=line-number>19</td><td class=line><span style='color: #5f00d7'>method</span> choose {E, self : <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E</span>} =
+<tr><td class=line-number>19</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>hd</span> <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>20</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>choose</span> (a: <span style='color: #005f5f'>Int</span>) (b: <span style='color: #005f5f'>Int</span>) =
+<tr><td class=line-number>20</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>21</td><td class=line>    if a &gt;= b  then self.fail ()
+<tr><td class=line-number>21</td><td class=line>  | []      =&gt; None
 </td></tr>
-<tr><td class=line-number>22</td><td class=line>    else if self.flip () then a
+<tr><td class=line-number>22</td><td class=line>  | x :: xs =&gt; Some x
 </td></tr>
-<tr><td class=line-number>23</td><td class=line>    else choose (a + <span style='font-weight: bold;color: #875f00'>1</span>) b
+<tr><td class=line-number>23</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>24</td><td class=line>  in choose
+<tr><td class=line-number>24</td><td class=line>
 </td></tr>
-<tr><td class=line-number>25</td><td class=line>
+<tr><td class=line-number>25</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>hdErr</span> { ~onError } <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>26</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* The method `triples` generates a Pythagorean triple. *)</span>
+<tr><td class=line-number>26</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>27</td><td class=line>method triples {E, self : <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E</span>} (n : <span style='color: #005f5f'>Int</span>) =
+<tr><td class=line-number>27</td><td class=line>  | []      =&gt; ~onError ()
 </td></tr>
-<tr><td class=line-number>28</td><td class=line>  <span style='color: #5f00d7'>let</span> a = self.choose <span style='font-weight: bold;color: #875f00'>1</span> n <span style='color: #5f00d7'>in</span>
+<tr><td class=line-number>28</td><td class=line>  | x :: xs =&gt; x
 </td></tr>
-<tr><td class=line-number>29</td><td class=line>  <span style='color: #5f00d7'>let</span> b = self.choose a n <span style='color: #5f00d7'>in</span>
+<tr><td class=line-number>29</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>30</td><td class=line>  <span style='color: #5f00d7'>let</span> c = self.choose b n <span style='color: #5f00d7'>in</span>
+<tr><td class=line-number>30</td><td class=line>
 </td></tr>
-<tr><td class=line-number>31</td><td class=line>  if a * a + b * b == c * c then Triple a b c
+<tr><td class=line-number>31</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>tl</span> <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>32</td><td class=line>  else self.fail ()
+<tr><td class=line-number>32</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>33</td><td class=line>
+<tr><td class=line-number>33</td><td class=line>  | []      =&gt; None
 </td></tr>
-<tr><td class=line-number>34</td><td class=line>
+<tr><td class=line-number>34</td><td class=line>  | x :: xs =&gt; Some xs
 </td></tr>
-<tr><td class=line-number>35</td><td class=line><span style='color: #5f00d7'>implicit</span> ~bt {<span style='color: #005f5f'>E_bt</span>} : <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E_bt</span>
+<tr><td class=line-number>35</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
 <tr><td class=line-number>36</td><td class=line>
 </td></tr>
-<tr><td class=line-number>37</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* The function `takeFirst` returns the first triple found. *)</span>
+<tr><td class=line-number>37</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>tlErr</span> { ~onError } <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>38</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>takeFirst</span> (f : {<span style='color: #5f00d7'>effect</span>=<span style='color: #005f5f'>E</span>} -&gt; <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>Int</span> -&gt;[<span style='color: #005f5f'>E</span>|<span style='color: #5f00d7'>_</span>] <span style='color: #5f00d7'>_</span>) (n: <span style='color: #005f5f'>Int</span>) =
+<tr><td class=line-number>38</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>39</td><td class=line>  <span style='color: #5f00d7'>handle</span> bt = BT { flip = <span style='color: #5f00d7'>effect</span> () / r =&gt;
+<tr><td class=line-number>39</td><td class=line>  | []      =&gt; ~onError ()
 </td></tr>
-<tr><td class=line-number>40</td><td class=line>    <span style='color: #5f00d7'>match</span> r True <span style='color: #5f00d7'>with</span>
+<tr><td class=line-number>40</td><td class=line>  | x :: xs =&gt; xs
 </td></tr>
-<tr><td class=line-number>41</td><td class=line>    | None   =&gt; r False
+<tr><td class=line-number>41</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>42</td><td class=line>    | Some x =&gt; Some x
+<tr><td class=line-number>42</td><td class=line>
 </td></tr>
-<tr><td class=line-number>43</td><td class=line>    <span style='color: #5f00d7'>end</span>
+<tr><td class=line-number>43</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>nth</span> <span style='text-decoration: underline;'>xs</span> (n : <span style='color: #005f5f'>Int</span>) =
 </td></tr>
-<tr><td class=line-number>44</td><td class=line>  , fail = <span style='color: #5f00d7'>effect</span> () =&gt; None
+<tr><td class=line-number>44</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>nthAux</span> <span style='text-decoration: underline;'>xs</span> (n : <span style='color: #005f5f'>Int</span>) =
 </td></tr>
-<tr><td class=line-number>45</td><td class=line>  }
+<tr><td class=line-number>45</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>46</td><td class=line>  <span style='color: #5f00d7'>return</span> x =&gt; Some x
+<tr><td class=line-number>46</td><td class=line>    | []      =&gt; None
 </td></tr>
-<tr><td class=line-number>47</td><td class=line>  <span style='color: #5f00d7'>in</span> f bt n
+<tr><td class=line-number>47</td><td class=line>    | x :: xs =&gt; <span style='color: #5f00d7'>if</span> n == <span style='font-weight: bold;color: #875f00'>0</span> then Some x <span style='color: #5f00d7'>else</span> nthAux xs (n - <span style='font-weight: bold;color: #875f00'>1</span>)
 </td></tr>
-<tr><td class=line-number>48</td><td class=line>
+<tr><td class=line-number>48</td><td class=line>    <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>49</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* The function `takeAll` returns list of all triples found. *)</span>
+<tr><td class=line-number>49</td><td class=line>  <span style='color: #5f00d7'>in</span> <span style='color: #5f00d7'>if</span> n &lt; <span style='font-weight: bold;color: #875f00'>0</span> then None <span style='color: #5f00d7'>else</span> nthAux xs n
 </td></tr>
-<tr><td class=line-number>50</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>takeAll</span> (f : {<span style='color: #5f00d7'>effect</span>=<span style='color: #005f5f'>E</span>} -&gt; <span style='color: #005f5f'>BT</span> <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>Int</span> -&gt;[<span style='color: #005f5f'>E</span>|<span style='color: #5f00d7'>_</span>] <span style='color: #5f00d7'>_</span>) (n: <span style='color: #005f5f'>Int</span>) =
+<tr><td class=line-number>50</td><td class=line>
 </td></tr>
-<tr><td class=line-number>51</td><td class=line>  <span style='color: #5f00d7'>handle</span> bt = BT
+<tr><td class=line-number>51</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>nthErr</span> { ~onError } <span style='text-decoration: underline;'>xs</span> (n : <span style='color: #005f5f'>Int</span>) =
 </td></tr>
-<tr><td class=line-number>52</td><td class=line>    { flip = <span style='color: #5f00d7'>effect</span> () / r =&gt; List.append (r True) (r False)
+<tr><td class=line-number>52</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>nthErrAux</span> <span style='text-decoration: underline;'>xs</span> (n : <span style='color: #005f5f'>Int</span>) =
 </td></tr>
-<tr><td class=line-number>53</td><td class=line>    , fail = <span style='color: #5f00d7'>effect</span> () =&gt; []
+<tr><td class=line-number>53</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>54</td><td class=line>    }
+<tr><td class=line-number>54</td><td class=line>    | []      =&gt; ~onError ()
 </td></tr>
-<tr><td class=line-number>55</td><td class=line>  <span style='color: #5f00d7'>return</span> x =&gt; [x]
+<tr><td class=line-number>55</td><td class=line>    | x :: xs =&gt; <span style='color: #5f00d7'>if</span> n == <span style='font-weight: bold;color: #875f00'>0</span> then x <span style='color: #5f00d7'>else</span> nthErrAux xs (n - <span style='font-weight: bold;color: #875f00'>1</span>)
 </td></tr>
-<tr><td class=line-number>56</td><td class=line>  <span style='color: #5f00d7'>in</span> f bt n
+<tr><td class=line-number>56</td><td class=line>    <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>57</td><td class=line>
+<tr><td class=line-number>57</td><td class=line>  <span style='color: #5f00d7'>in</span> <span style='color: #5f00d7'>if</span> n &lt; <span style='font-weight: bold;color: #875f00'>0</span> then ~onError () <span style='color: #5f00d7'>else</span> nthErrAux xs n
 </td></tr>
-<tr><td class=line-number>58</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* Printing utilities *)</span>
+<tr><td class=line-number>58</td><td class=line>
 </td></tr>
-<tr><td class=line-number>59</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>printTriple</span> t = 
+<tr><td class=line-number>59</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>append</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
 </td></tr>
-<tr><td class=line-number>60</td><td class=line>  <span style='color: #5f00d7'>match</span> t <span style='color: #5f00d7'>with</span>
+<tr><td class=line-number>60</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>61</td><td class=line>  | Triple a b c =&gt; printStrLn ( 
+<tr><td class=line-number>61</td><td class=line>  | []      =&gt; ys
 </td></tr>
-<tr><td class=line-number>62</td><td class=line>    &quot;(&quot; + a.toString + &quot; &quot; + b.toString + &quot; &quot; + c.toString + &quot;)&quot;)
+<tr><td class=line-number>62</td><td class=line>  | x :: xs =&gt; x :: append xs ys
 </td></tr>
 <tr><td class=line-number>63</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
 <tr><td class=line-number>64</td><td class=line>
 </td></tr>
-<tr><td class=line-number>65</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>printList</span> xs =
+<tr><td class=line-number>65</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>revAppend</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>acc</span> =
 </td></tr>
 <tr><td class=line-number>66</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>67</td><td class=line>  | [] =&gt; printStrLn &quot;&quot;
+<tr><td class=line-number>67</td><td class=line>  | []      =&gt; acc
 </td></tr>
-<tr><td class=line-number>68</td><td class=line>  | t :: xs =&gt; <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>_</span> = printTriple t <span style='color: #5f00d7'>in</span>
+<tr><td class=line-number>68</td><td class=line>  | x :: xs =&gt; revAppend xs (x :: acc)
 </td></tr>
-<tr><td class=line-number>69</td><td class=line>                       printList xs
+<tr><td class=line-number>69</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>70</td><td class=line>  <span style='color: #5f00d7'>end</span>
+<tr><td class=line-number>70</td><td class=line>
 </td></tr>
-<tr><td class=line-number>71</td><td class=line>
+<tr><td class=line-number>71</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>rev</span> <span style='text-decoration: underline;'>xs</span> = revAppend xs []
 </td></tr>
-<tr><td class=line-number>72</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* Main program *)</span>
+<tr><td class=line-number>72</td><td class=line>
 </td></tr>
-<tr><td class=line-number>73</td><td class=line><span style='color: #5f00d7'>let</span> maxValue = <span style='font-weight: bold;color: #875f00'>25</span>
+<tr><td class=line-number>73</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>concat</span> <span style='text-decoration: underline;'>xss</span> =
 </td></tr>
-<tr><td class=line-number>74</td><td class=line>
+<tr><td class=line-number>74</td><td class=line>  <span style='color: #5f00d7'>match</span> xss <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>75</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>_</span> = printStrLn &quot;First triple only:&quot;
+<tr><td class=line-number>75</td><td class=line>  | []        =&gt; []
 </td></tr>
-<tr><td class=line-number>76</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>_</span> =  <span style='color: #5f00d7'>match</span> takeFirst (<span style='color: #5f00d7'>fn</span> ~bt =&gt; ~bt.triples) maxValue <span style='color: #5f00d7'>with</span>
+<tr><td class=line-number>76</td><td class=line>  | xs :: xss =&gt; append xs (concat xss)
 </td></tr>
-<tr><td class=line-number>77</td><td class=line>  | None =&gt; printStrLn &quot;None&quot;
+<tr><td class=line-number>77</td><td class=line>  <span style='color: #5f00d7'>end</span>
 </td></tr>
-<tr><td class=line-number>78</td><td class=line>  | Some t =&gt; printTriple t
+<tr><td class=line-number>78</td><td class=line>
 </td></tr>
-<tr><td class=line-number>79</td><td class=line>  <span style='color: #5f00d7'>end</span>
+<tr><td class=line-number>79</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>map</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
 </td></tr>
-<tr><td class=line-number>80</td><td class=line>
+<tr><td class=line-number>80</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
 </td></tr>
-<tr><td class=line-number>81</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>_</span> = printStrLn &quot;All triples:&quot;
+<tr><td class=line-number>81</td><td class=line>  | []      =&gt; []
 </td></tr>
-<tr><td class=line-number>82</td><td class=line><span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>_</span> =  <span style='color: #5f00d7'>let</span> res = takeAll (<span style='color: #5f00d7'>fn</span> ~bt =&gt; ~bt.triples) maxValue
+<tr><td class=line-number>82</td><td class=line>  | x :: xs =&gt; f x :: map f xs
 </td></tr>
-<tr><td class=line-number>83</td><td class=line>  <span style='color: #5f00d7'>in</span> printList res
+<tr><td class=line-number>83</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>84</td><td class=line>
+</td></tr>
+<tr><td class=line-number>85</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>mapi</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>86</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>mapiAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) f xs =
+</td></tr>
+<tr><td class=line-number>87</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>88</td><td class=line>    | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>89</td><td class=line>    | x :: xs =&gt; f i x :: mapiAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) f xs
+</td></tr>
+<tr><td class=line-number>90</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>91</td><td class=line>  <span style='color: #5f00d7'>in</span> mapiAux <span style='font-weight: bold;color: #875f00'>0</span> f xs
+</td></tr>
+<tr><td class=line-number>92</td><td class=line>
+</td></tr>
+<tr><td class=line-number>93</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>map2</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>94</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>map2Aux</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>95</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>96</td><td class=line>    | [],      []      =&gt; []
+</td></tr>
+<tr><td class=line-number>97</td><td class=line>    | x :: xs, y :: ys =&gt; f x y :: map2Aux xs ys
+</td></tr>
+<tr><td class=line-number>98</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>99</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>100</td><td class=line>  <span style='color: #5f00d7'>in</span> map2Aux xs ys
+</td></tr>
+<tr><td class=line-number>101</td><td class=line>
+</td></tr>
+<tr><td class=line-number>102</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>revMapAppend</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>103</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>104</td><td class=line>  | []      =&gt; ys
+</td></tr>
+<tr><td class=line-number>105</td><td class=line>  | x :: xs =&gt; revMapAppend f xs (f x :: ys)
+</td></tr>
+<tr><td class=line-number>106</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>107</td><td class=line>
+</td></tr>
+<tr><td class=line-number>108</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>revMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> = revMapAppend f xs []
+</td></tr>
+<tr><td class=line-number>109</td><td class=line>
+</td></tr>
+<tr><td class=line-number>110</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>revMap2</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>111</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>revMap2Aux</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>112</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>113</td><td class=line>    | [],      []      =&gt; acc
+</td></tr>
+<tr><td class=line-number>114</td><td class=line>    | x :: xs, y :: ys =&gt; revMap2Aux (f x y :: acc) xs ys
+</td></tr>
+<tr><td class=line-number>115</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>116</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>117</td><td class=line>  <span style='color: #5f00d7'>in</span> revMap2Aux [] xs ys
+</td></tr>
+<tr><td class=line-number>118</td><td class=line>
+</td></tr>
+<tr><td class=line-number>119</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>filter</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>120</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>121</td><td class=line>  | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>122</td><td class=line>  | x :: xs =&gt; <span style='color: #5f00d7'>if</span> p x then x :: filter p xs <span style='color: #5f00d7'>else</span> filter p xs
+</td></tr>
+<tr><td class=line-number>123</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>124</td><td class=line>
+</td></tr>
+<tr><td class=line-number>125</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>filteri</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>126</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>filteriAux</span> <span style='text-decoration: underline;'>p</span> (i : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>127</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>128</td><td class=line>    | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>129</td><td class=line>    | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>130</td><td class=line>      <span style='color: #5f00d7'>if</span> p i x then x :: filteriAux p (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>131</td><td class=line>      <span style='color: #5f00d7'>else</span> filteriAux p (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>132</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>133</td><td class=line>  <span style='color: #5f00d7'>in</span> filteriAux p <span style='font-weight: bold;color: #875f00'>0</span> xs
+</td></tr>
+<tr><td class=line-number>134</td><td class=line>
+</td></tr>
+<tr><td class=line-number>135</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>filterMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>136</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>137</td><td class=line>  | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>138</td><td class=line>  | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>139</td><td class=line>    <span style='color: #5f00d7'>match</span> f x <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>140</td><td class=line>    | None   =&gt; filterMap f xs
+</td></tr>
+<tr><td class=line-number>141</td><td class=line>    | Some x =&gt; x :: filterMap f xs
+</td></tr>
+<tr><td class=line-number>142</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>143</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>144</td><td class=line>
+</td></tr>
+<tr><td class=line-number>145</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>concatMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> = concat (map f xs)
+</td></tr>
+<tr><td class=line-number>146</td><td class=line>
+</td></tr>
+<tr><td class=line-number>147</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>take</span> (<span style='text-decoration: underline;'>n</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>148</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>149</td><td class=line>  | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>150</td><td class=line>  | x :: xs =&gt; <span style='color: #5f00d7'>if</span> n == <span style='font-weight: bold;color: #875f00'>0</span> then [] <span style='color: #5f00d7'>else</span> x :: take (n - <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>151</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>152</td><td class=line>
+</td></tr>
+<tr><td class=line-number>153</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>drop</span> (<span style='text-decoration: underline;'>n</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>154</td><td class=line>  <span style='color: #5f00d7'>if</span> n &lt;= <span style='font-weight: bold;color: #875f00'>0</span> then xs <span style='color: #5f00d7'>else</span>
+</td></tr>
+<tr><td class=line-number>155</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>156</td><td class=line>    | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>157</td><td class=line>    | x :: xs =&gt; drop (n - <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>158</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>159</td><td class=line>
+</td></tr>
+<tr><td class=line-number>160</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>takeWhile</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>161</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>162</td><td class=line>  | []      =&gt; []
+</td></tr>
+<tr><td class=line-number>163</td><td class=line>  | x :: xs =&gt; <span style='color: #5f00d7'>if</span> p x then x :: takeWhile p xs <span style='color: #5f00d7'>else</span> []
+</td></tr>
+<tr><td class=line-number>164</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>165</td><td class=line>
+</td></tr>
+<tr><td class=line-number>166</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>dropWhile</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>167</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>168</td><td class=line>  | []       =&gt; []
+</td></tr>
+<tr><td class=line-number>169</td><td class=line>  | x :: xs&#39; =&gt; <span style='color: #5f00d7'>if</span> p x then dropWhile p xs&#39; <span style='color: #5f00d7'>else</span> xs
+</td></tr>
+<tr><td class=line-number>170</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>171</td><td class=line>
+</td></tr>
+<tr><td class=line-number>172</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>iter</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>173</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>174</td><td class=line>  | []      =&gt; ()
+</td></tr>
+<tr><td class=line-number>175</td><td class=line>  | x :: xs =&gt; f x; iter f xs
+</td></tr>
+<tr><td class=line-number>176</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>177</td><td class=line>
+</td></tr>
+<tr><td class=line-number>178</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>iteri</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>179</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>iteriAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>180</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>181</td><td class=line>    | []      =&gt; ()
+</td></tr>
+<tr><td class=line-number>182</td><td class=line>    | x :: xs =&gt; f i x; iteriAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>183</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>184</td><td class=line>  <span style='color: #5f00d7'>in</span> iteriAux <span style='font-weight: bold;color: #875f00'>0</span> xs
+</td></tr>
+<tr><td class=line-number>185</td><td class=line>
+</td></tr>
+<tr><td class=line-number>186</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>iter2</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>187</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>iter2Aux</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>188</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>189</td><td class=line>    | [],      []      =&gt; ()
+</td></tr>
+<tr><td class=line-number>190</td><td class=line>    | x :: xs, y :: ys =&gt; f x y; iter2Aux xs ys
+</td></tr>
+<tr><td class=line-number>191</td><td class=line>    | <span style='color: #5f00d7'>_</span>                =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>192</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>193</td><td class=line>  <span style='color: #5f00d7'>in</span> iter2Aux xs ys
+</td></tr>
+<tr><td class=line-number>194</td><td class=line>
+</td></tr>
+<tr><td class=line-number>195</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>init</span> (<span style='text-decoration: underline;'>len</span> : <span style='color: #005f5f'>Int</span>) f =
+</td></tr>
+<tr><td class=line-number>196</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>initAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) f =
+</td></tr>
+<tr><td class=line-number>197</td><td class=line>    <span style='color: #5f00d7'>if</span> i &gt;= len then []
+</td></tr>
+<tr><td class=line-number>198</td><td class=line>    <span style='color: #5f00d7'>else</span> f i :: initAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) f
+</td></tr>
+<tr><td class=line-number>199</td><td class=line>  <span style='color: #5f00d7'>in</span> initAux <span style='font-weight: bold;color: #875f00'>0</span> f
+</td></tr>
+<tr><td class=line-number>200</td><td class=line>
+</td></tr>
+<tr><td class=line-number>201</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>foldLeft</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>202</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>203</td><td class=line>  | []      =&gt; acc
+</td></tr>
+<tr><td class=line-number>204</td><td class=line>  | x :: xs =&gt; foldLeft f (f acc x) xs
+</td></tr>
+<tr><td class=line-number>205</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>206</td><td class=line>
+</td></tr>
+<tr><td class=line-number>207</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>foldRight</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>acc</span> =
+</td></tr>
+<tr><td class=line-number>208</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>209</td><td class=line>  | []      =&gt; acc
+</td></tr>
+<tr><td class=line-number>210</td><td class=line>  | x :: xs =&gt; f x (foldRight f xs acc)
+</td></tr>
+<tr><td class=line-number>211</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>212</td><td class=line>
+</td></tr>
+<tr><td class=line-number>213</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>foldLeft2</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>214</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>foldLeft2Aux</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>215</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>216</td><td class=line>    | [],      []      =&gt; acc
+</td></tr>
+<tr><td class=line-number>217</td><td class=line>    | x :: xs, y :: ys =&gt; foldLeft2Aux (f acc x y) xs ys
+</td></tr>
+<tr><td class=line-number>218</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>219</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>220</td><td class=line>  <span style='color: #5f00d7'>in</span> foldLeft2Aux acc xs ys
+</td></tr>
+<tr><td class=line-number>221</td><td class=line>
+</td></tr>
+<tr><td class=line-number>222</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>foldRight2</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> <span style='text-decoration: underline;'>acc</span> =
+</td></tr>
+<tr><td class=line-number>223</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>foldRight2Aux</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> <span style='text-decoration: underline;'>acc</span> =
+</td></tr>
+<tr><td class=line-number>224</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>225</td><td class=line>    | [],      []      =&gt; acc
+</td></tr>
+<tr><td class=line-number>226</td><td class=line>    | x :: xs, y :: ys =&gt; f x y (foldRight2Aux xs ys acc)
+</td></tr>
+<tr><td class=line-number>227</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>228</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>229</td><td class=line>  <span style='color: #5f00d7'>in</span> foldRight2Aux xs ys acc
+</td></tr>
+<tr><td class=line-number>230</td><td class=line>
+</td></tr>
+<tr><td class=line-number>231</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>forAll</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>232</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>233</td><td class=line>  | []      =&gt; True
+</td></tr>
+<tr><td class=line-number>234</td><td class=line>  | x :: xs =&gt; p x &amp;&amp; forAll p xs
+</td></tr>
+<tr><td class=line-number>235</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>236</td><td class=line>
+</td></tr>
+<tr><td class=line-number>237</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>forAll2</span> { ~onError } <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>238</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>forAll2Aux</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>239</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>240</td><td class=line>    | [],      []      =&gt; True
+</td></tr>
+<tr><td class=line-number>241</td><td class=line>    | x :: xs, y :: ys =&gt; p x y &amp;&amp; forAll2Aux xs ys
+</td></tr>
+<tr><td class=line-number>242</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>243</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>244</td><td class=line>  <span style='color: #5f00d7'>in</span> forAll2Aux xs ys
+</td></tr>
+<tr><td class=line-number>245</td><td class=line>
+</td></tr>
+<tr><td class=line-number>246</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>exists</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>247</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>248</td><td class=line>  | []      =&gt; False
+</td></tr>
+<tr><td class=line-number>249</td><td class=line>  | x :: xs =&gt; p x || exists p xs
+</td></tr>
+<tr><td class=line-number>250</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>251</td><td class=line>
+</td></tr>
+<tr><td class=line-number>252</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>exists2</span> { ~onError } <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>253</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>exists2Aux</span> <span style='text-decoration: underline;'>xs</span> <span style='text-decoration: underline;'>ys</span> =
+</td></tr>
+<tr><td class=line-number>254</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>255</td><td class=line>    | [],      []      =&gt; False
+</td></tr>
+<tr><td class=line-number>256</td><td class=line>    | x :: xs, y :: ys =&gt; p x y || exists2Aux xs ys
+</td></tr>
+<tr><td class=line-number>257</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>258</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>259</td><td class=line>  <span style='color: #5f00d7'>in</span> exists2Aux xs ys
+</td></tr>
+<tr><td class=line-number>260</td><td class=line>
+</td></tr>
+<tr><td class=line-number>261</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>find</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>262</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>263</td><td class=line>  | []      =&gt; None
+</td></tr>
+<tr><td class=line-number>264</td><td class=line>  | x :: xs =&gt; <span style='color: #5f00d7'>if</span> p x then Some x <span style='color: #5f00d7'>else</span> find p xs
+</td></tr>
+<tr><td class=line-number>265</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>266</td><td class=line>
+</td></tr>
+<tr><td class=line-number>267</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>findErr</span> { ~onError } <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>268</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findErrAux</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>269</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>270</td><td class=line>    | []      =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>271</td><td class=line>    | x :: xs =&gt; <span style='color: #5f00d7'>if</span> p x then x <span style='color: #5f00d7'>else</span> findErrAux p xs
+</td></tr>
+<tr><td class=line-number>272</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>273</td><td class=line>  <span style='color: #5f00d7'>in</span> findErrAux p xs
+</td></tr>
+<tr><td class=line-number>274</td><td class=line>
+</td></tr>
+<tr><td class=line-number>275</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>findIndex</span> <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>276</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findIndexAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>277</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>278</td><td class=line>    | []      =&gt; None
+</td></tr>
+<tr><td class=line-number>279</td><td class=line>    | x :: xs =&gt; <span style='color: #5f00d7'>if</span> p x then Some i <span style='color: #5f00d7'>else</span> findIndexAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>280</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>281</td><td class=line>  <span style='color: #5f00d7'>in</span> findIndexAux <span style='font-weight: bold;color: #875f00'>0</span> xs
+</td></tr>
+<tr><td class=line-number>282</td><td class=line>
+</td></tr>
+<tr><td class=line-number>283</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>findIndexErr</span> { ~onError } <span style='text-decoration: underline;'>p</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>284</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findIndexErrAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>285</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>286</td><td class=line>    | []      =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>287</td><td class=line>    | x :: xs =&gt; <span style='color: #5f00d7'>if</span> p x then i <span style='color: #5f00d7'>else</span> findIndexErrAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>288</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>289</td><td class=line>  <span style='color: #5f00d7'>in</span> findIndexErrAux <span style='font-weight: bold;color: #875f00'>0</span> xs
+</td></tr>
+<tr><td class=line-number>290</td><td class=line>
+</td></tr>
+<tr><td class=line-number>291</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>292</td><td class=line>  <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>293</td><td class=line>  | []      =&gt; None
+</td></tr>
+<tr><td class=line-number>294</td><td class=line>  | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>295</td><td class=line>    <span style='color: #5f00d7'>match</span> f x <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>296</td><td class=line>    | Some x =&gt; Some x
+</td></tr>
+<tr><td class=line-number>297</td><td class=line>    | None   =&gt; findMap f xs
+</td></tr>
+<tr><td class=line-number>298</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>299</td><td class=line>  <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>300</td><td class=line>
+</td></tr>
+<tr><td class=line-number>301</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>findMapErr</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>302</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findMapErrAux</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>303</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>304</td><td class=line>    | []      =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>305</td><td class=line>    | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>306</td><td class=line>      <span style='color: #5f00d7'>match</span> f x <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>307</td><td class=line>      | None   =&gt; findMapErrAux f xs
+</td></tr>
+<tr><td class=line-number>308</td><td class=line>      | Some x =&gt; x
+</td></tr>
+<tr><td class=line-number>309</td><td class=line>      <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>310</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>311</td><td class=line>  <span style='color: #5f00d7'>in</span> findMapErrAux f xs
+</td></tr>
+<tr><td class=line-number>312</td><td class=line>
+</td></tr>
+<tr><td class=line-number>313</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>findMapi</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>314</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findMapiAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>315</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>316</td><td class=line>    | []      =&gt; None
+</td></tr>
+<tr><td class=line-number>317</td><td class=line>    | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>318</td><td class=line>      <span style='color: #5f00d7'>match</span> f i x <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>319</td><td class=line>      | Some x&#39; =&gt; Some x&#39;
+</td></tr>
+<tr><td class=line-number>320</td><td class=line>      | None    =&gt; findMapiAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>321</td><td class=line>      <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>322</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>323</td><td class=line>  <span style='color: #5f00d7'>in</span> findMapiAux <span style='font-weight: bold;color: #875f00'>0</span> xs
+</td></tr>
+<tr><td class=line-number>324</td><td class=line>
+</td></tr>
+<tr><td class=line-number>325</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>findMapiErr</span> { ~onError } <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>326</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>findMapiErrAux</span> (<span style='text-decoration: underline;'>i</span> : <span style='color: #005f5f'>Int</span>) xs =
+</td></tr>
+<tr><td class=line-number>327</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>328</td><td class=line>    | []      =&gt; ~onError ()
+</td></tr>
+<tr><td class=line-number>329</td><td class=line>    | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>330</td><td class=line>      <span style='color: #5f00d7'>match</span> f i x <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>331</td><td class=line>      | Some x =&gt; x
+</td></tr>
+<tr><td class=line-number>332</td><td class=line>      | None   =&gt; findMapiErrAux (i + <span style='font-weight: bold;color: #875f00'>1</span>) xs
+</td></tr>
+<tr><td class=line-number>333</td><td class=line>      <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>334</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>335</td><td class=line>  <span style='color: #5f00d7'>in</span> findMapiErrAux <span style='font-weight: bold;color: #875f00'>0</span> xs
+</td></tr>
+<tr><td class=line-number>336</td><td class=line>
+</td></tr>
+<tr><td class=line-number>337</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>foldLeftMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>338</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>foldLeftMapAux</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>l_acc</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>339</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>340</td><td class=line>    | []      =&gt; acc, rev l_acc
+</td></tr>
+<tr><td class=line-number>341</td><td class=line>    | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>342</td><td class=line>      <span style='color: #5f00d7'>let</span> (acc, x) = f acc x <span style='color: #5f00d7'>in</span>
+</td></tr>
+<tr><td class=line-number>343</td><td class=line>      foldLeftMapAux acc (x :: l_acc) xs
+</td></tr>
+<tr><td class=line-number>344</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>345</td><td class=line>  <span style='color: #5f00d7'>in</span> foldLeftMapAux acc [] xs
+</td></tr>
+<tr><td class=line-number>346</td><td class=line>
+</td></tr>
+<tr><td class=line-number>347</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>foldLeftFilterMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>348</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>foldLeftFilterMapAux</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>l_acc</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>349</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>350</td><td class=line>    | []      =&gt; acc, rev l_acc
+</td></tr>
+<tr><td class=line-number>351</td><td class=line>    | x :: xs =&gt;
+</td></tr>
+<tr><td class=line-number>352</td><td class=line>      <span style='color: #5f00d7'>match</span> f acc x <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>353</td><td class=line>      | None          =&gt; foldLeftFilterMapAux acc l_acc xs
+</td></tr>
+<tr><td class=line-number>354</td><td class=line>      | Some (acc, x) =&gt; foldLeftFilterMapAux acc (x :: l_acc) xs
+</td></tr>
+<tr><td class=line-number>355</td><td class=line>      <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>356</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>357</td><td class=line>  <span style='color: #5f00d7'>in</span> foldLeftFilterMapAux acc [] xs
+</td></tr>
+<tr><td class=line-number>358</td><td class=line>
+</td></tr>
+<tr><td class=line-number>359</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>foldLeftConcatMap</span> <span style='text-decoration: underline;'>f</span> <span style='text-decoration: underline;'>acc</span> <span style='text-decoration: underline;'>xs</span> =
+</td></tr>
+<tr><td class=line-number>360</td><td class=line>  <span style='color: #5f00d7'>let</span> (acc, xs) = foldLeftMap f acc xs
+</td></tr>
+<tr><td class=line-number>361</td><td class=line>  <span style='color: #5f00d7'>in</span> (acc, concat xs)
+</td></tr>
+<tr><td class=line-number>362</td><td class=line>
+</td></tr>
+<tr><td class=line-number>363</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* Operations on lists containing comparable elements *)</span>
+</td></tr>
+<tr><td class=line-number>364</td><td class=line>
+</td></tr>
+<tr><td class=line-number>365</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>mem</span>
+</td></tr>
+<tr><td class=line-number>366</td><td class=line>  { E, <span style='color: #5f00d7'>method</span> equal : <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>E</span> -&gt;[] <span style='color: #005f5f'>Bool</span> }
+</td></tr>
+<tr><td class=line-number>367</td><td class=line>  (<span style='text-decoration: underline;'>v</span> : <span style='color: #005f5f'>E</span>) (xs : <span style='color: #005f5f'>List</span> <span style='color: #005f5f'>E</span>) =
+</td></tr>
+<tr><td class=line-number>368</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>memAux</span> (<span style='text-decoration: underline;'>xs</span> : <span style='color: #005f5f'>List</span> <span style='color: #005f5f'>E</span>) =
+</td></tr>
+<tr><td class=line-number>369</td><td class=line>    <span style='color: #5f00d7'>match</span> xs <span style='color: #5f00d7'>with</span>
+</td></tr>
+<tr><td class=line-number>370</td><td class=line>    | []      =&gt; False
+</td></tr>
+<tr><td class=line-number>371</td><td class=line>    | x :: xs =&gt; v == x || memAux xs
+</td></tr>
+<tr><td class=line-number>372</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>373</td><td class=line>  <span style='color: #5f00d7'>in</span> memAux xs
+</td></tr>
+<tr><td class=line-number>374</td><td class=line>
+</td></tr>
+<tr><td class=line-number>375</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>let</span> <span style='color: #005fd7'>equal</span>
+</td></tr>
+<tr><td class=line-number>376</td><td class=line>  { E, <span style='color: #5f00d7'>method</span> equal : <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>E</span> -&gt;[] <span style='color: #005f5f'>Bool</span> }
+</td></tr>
+<tr><td class=line-number>377</td><td class=line>  (<span style='text-decoration: underline;'>xs</span> : <span style='color: #005f5f'>List</span> <span style='color: #005f5f'>E</span>) (ys : <span style='color: #005f5f'>List</span> <span style='color: #005f5f'>E</span>) =
+</td></tr>
+<tr><td class=line-number>378</td><td class=line>  <span style='color: #5f00d7'>let</span> <span style='color: #5f00d7'>rec</span> <span style='color: #005fd7'>equalAux</span> (<span style='text-decoration: underline;'>xs</span> : <span style='color: #005f5f'>List</span> <span style='color: #005f5f'>E</span>) (ys : <span style='color: #005f5f'>List</span> <span style='color: #005f5f'>E</span>) =
+</td></tr>
+<tr><td class=line-number>379</td><td class=line>    <span style='color: #5f00d7'>match</span> xs, ys <span style='color: #5f00d7'>with</span> 
+</td></tr>
+<tr><td class=line-number>380</td><td class=line>    | [],      []      =&gt; True
+</td></tr>
+<tr><td class=line-number>381</td><td class=line>    | x :: xs, y :: ys =&gt; x == y &amp;&amp; equalAux xs ys
+</td></tr>
+<tr><td class=line-number>382</td><td class=line>    | <span style='color: #5f00d7'>_</span>,       <span style='color: #5f00d7'>_</span>       =&gt; False
+</td></tr>
+<tr><td class=line-number>383</td><td class=line>    <span style='color: #5f00d7'>end</span>
+</td></tr>
+<tr><td class=line-number>384</td><td class=line>  <span style='color: #5f00d7'>in</span> equalAux xs ys
+</td></tr>
+<tr><td class=line-number>385</td><td class=line>
+</td></tr>
+<tr><td class=line-number>386</td><td class=line><span style='font-style: italic;color: #8a8a8a'>(* method versions of these functions *)</span>
+</td></tr>
+<tr><td class=line-number>387</td><td class=line><span style='color: #5f00d7'>implicit</span> ~onError
+</td></tr>
+<tr><td class=line-number>388</td><td class=line>
+</td></tr>
+<tr><td class=line-number>389</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>isEmpty</span> = isEmpty self
+</td></tr>
+<tr><td class=line-number>390</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>length</span> = length self
+</td></tr>
+<tr><td class=line-number>391</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>hd</span> = hd self
+</td></tr>
+<tr><td class=line-number>392</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>hdErr</span> = hdErr self
+</td></tr>
+<tr><td class=line-number>393</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>tl</span> = tl self
+</td></tr>
+<tr><td class=line-number>394</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>tlErr</span> = tlErr self
+</td></tr>
+<tr><td class=line-number>395</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>nth</span> n = nth self n
+</td></tr>
+<tr><td class=line-number>396</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>nthErr</span> n = nthErr self n
+</td></tr>
+<tr><td class=line-number>397</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>append</span> ys = append self ys
+</td></tr>
+<tr><td class=line-number>398</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>add</span> ys = append self ys
+</td></tr>
+<tr><td class=line-number>399</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>revAppend</span> ys = revAppend self ys
+</td></tr>
+<tr><td class=line-number>400</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>rev</span> = rev self
+</td></tr>
+<tr><td class=line-number>401</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>concat</span> = concat self
+</td></tr>
+<tr><td class=line-number>402</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>map</span> f = map f self
+</td></tr>
+<tr><td class=line-number>403</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>mapi</span> f = mapi f self
+</td></tr>
+<tr><td class=line-number>404</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>revMapAppend</span> f ys = revMapAppend f self ys
+</td></tr>
+<tr><td class=line-number>405</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>revMap</span> f = revMap f self
+</td></tr>
+<tr><td class=line-number>406</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>filter</span> p = filter p self
+</td></tr>
+<tr><td class=line-number>407</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>filteri</span> p = filteri p self
+</td></tr>
+<tr><td class=line-number>408</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>filterMap</span> f = filterMap f self
+</td></tr>
+<tr><td class=line-number>409</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>concatMap</span> f = concatMap f self
+</td></tr>
+<tr><td class=line-number>410</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>drop</span> n = drop n self
+</td></tr>
+<tr><td class=line-number>411</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>takeWhile</span> p = takeWhile p self
+</td></tr>
+<tr><td class=line-number>412</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>dropWhile</span> p = dropWhile p self
+</td></tr>
+<tr><td class=line-number>413</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>iteri</span> f = iteri f self
+</td></tr>
+<tr><td class=line-number>414</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>foldLeft</span> f acc = foldLeft f acc self
+</td></tr>
+<tr><td class=line-number>415</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>foldRight</span> f acc = foldRight f self acc
+</td></tr>
+<tr><td class=line-number>416</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>forAll</span> p = forAll p self
+</td></tr>
+<tr><td class=line-number>417</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>exists</span> p = exists p self
+</td></tr>
+<tr><td class=line-number>418</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>find</span> p = find p self
+</td></tr>
+<tr><td class=line-number>419</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findErr</span> p = findErr p self
+</td></tr>
+<tr><td class=line-number>420</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findIndex</span> p = findIndex p self
+</td></tr>
+<tr><td class=line-number>421</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findIndexErr</span> p = findIndexErr p self
+</td></tr>
+<tr><td class=line-number>422</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findMap</span> f = findMap f self
+</td></tr>
+<tr><td class=line-number>423</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findMapErr</span> f = findMapErr f self
+</td></tr>
+<tr><td class=line-number>424</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findMapi</span> f = findMapi f self
+</td></tr>
+<tr><td class=line-number>425</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>findMapiErr</span> f = findMapiErr f self
+</td></tr>
+<tr><td class=line-number>426</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>foldLeftMap</span> f acc = foldLeftMap f acc self
+</td></tr>
+<tr><td class=line-number>427</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>foldLeftFilterMap</span> f acc = foldLeftFilterMap f acc self
+</td></tr>
+<tr><td class=line-number>428</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>foldLeftConcatMap</span> f acc = foldLeftConcatMap f acc self
+</td></tr>
+<tr><td class=line-number>429</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>mem</span> { E, <span style='color: #5f00d7'>method</span> equal : <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>E</span> -&gt;[] <span style='color: #005f5f'>Bool</span> } v =
+</td></tr>
+<tr><td class=line-number>430</td><td class=line>  mem {E} v self
+</td></tr>
+<tr><td class=line-number>431</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>equal</span> { E, <span style='color: #5f00d7'>method</span> equal : <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>E</span> -&gt;[] <span style='color: #005f5f'>Bool</span> } xs =
+</td></tr>
+<tr><td class=line-number>432</td><td class=line>  equal {E} self xs
+</td></tr>
+<tr><td class=line-number>433</td><td class=line><span style='color: #5f00d7'>pub</span> <span style='color: #5f00d7'>method</span> <span style='color: #005fd7'>neq</span> { E, <span style='color: #5f00d7'>method</span> equal : <span style='color: #005f5f'>E</span> -&gt; <span style='color: #005f5f'>E</span> -&gt;[] <span style='color: #005f5f'>Bool</span> } xs =
+</td></tr>
+<tr><td class=line-number>434</td><td class=line>  not (equal {E} self xs)
 </td></tr>
 </table>
 

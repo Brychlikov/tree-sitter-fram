@@ -14,10 +14,11 @@ module.exports = grammar({
 
   extras: $ => [
     $.block_comment,
-    $.test_comment,
+    $.line_comment,
     /\s/,
   ],
 
+  externals: $ => [$.block_comment_start, $.block_comment_tag, $.block_comment_rest, $.error_sentinel],
 
   rules: {
     // TODO: add the actual grammar rules
@@ -38,15 +39,15 @@ module.exports = grammar({
     str: _ => /".*"/,
     chr: _ => /'.'/,
 
-    // comment: _ => /\(\*.*(\n.*)*.*\*\)/,
+    line_comment: $ => seq("#", repeat($._line_comment_text), "\n"),
+    _line_comment_text: $ => /./,
     block_comment: $ => seq(
-      "(*",
-      optional($.comment_text),
-      "*)"
+      $.block_comment_start,
+      optional($.block_comment_tag),
+      $.block_comment_rest,
     ),
     comment_text: $ => repeat1(/.|\n|\r/),
 
-    test_comment: $ => /\/\/.*\n/,
 
     _name: $ => choice(
       $.label, 

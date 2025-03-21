@@ -15,6 +15,7 @@ module.exports = grammar({
   extras: $ => [
     $.block_comment,
     $.line_comment,
+    $.line_doc_comment,
     /\s/,
   ],
 
@@ -40,6 +41,7 @@ module.exports = grammar({
     chr: _ => /'.'/,
 
     line_comment: $ => seq("#", repeat($._line_comment_text), "\n"),
+    line_doc_comment: $ => seq("##", repeat($._line_comment_text), "\n"),
     _line_comment_text: $ => /./,
     block_comment: $ => seq(
       $.block_comment_start,

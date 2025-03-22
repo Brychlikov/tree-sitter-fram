@@ -30,6 +30,8 @@
 "_"        @keyword
 (uid_path) @type
 
+(line_comment) @comment
+(line_doc_comment) @comment
 (block_comment) @comment
 
 (num) @number

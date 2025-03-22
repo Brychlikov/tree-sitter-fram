@@ -9,7 +9,7 @@
 "finally"  @keyword
 "fn"       @keyword
 "handle"   @keyword
-;"handler"  @keyword
+"handler"  @keyword
 "if"       @keyword
 "implicit" @keyword
 "import"   @keyword

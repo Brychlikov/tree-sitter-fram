@@ -11,7 +11,7 @@
 "handle"   @keyword
 "handler"  @keyword
 "if"       @keyword
-"implicit" @keyword
+"parameter" @keyword
 "import"   @keyword
 "in"       @keyword
 ;"label"    @keyword
@@ -33,6 +33,8 @@
 (line_comment) @comment
 (line_doc_comment) @comment
 (block_comment) @comment
+(block_comment_start) @comment
+(block_comment_unfinished) @comment
 
 (num) @number
 

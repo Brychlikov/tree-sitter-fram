@@ -24,10 +24,8 @@
             # (tree-sitter.override {webUISupport = true;})
             tree-sitter
             nodejs_20 graphviz
+            clang
           ];
-          shellHook = ''
-            alias ts=tree-sitter
-          '';
         };
       }
     );

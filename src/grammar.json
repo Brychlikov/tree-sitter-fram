@@ -237,7 +237,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "def_implicit"
+            "name": "def_parameter"
           },
           {
             "type": "SYMBOL",
@@ -776,40 +776,16 @@
         }
       ]
     },
-    "def_implicit": {
+    "def_parameter": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "implicit"
+          "value": "parameter"
         },
         {
           "type": "SYMBOL",
-          "name": "tlid"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "implicit_ty_args"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "type_annot"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "name": "_field"
         }
       ]
     },
@@ -2317,6 +2293,10 @@
     {
       "type": "SYMBOL",
       "name": "block_comment_rest"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "block_comment_unfinished"
     },
     {
       "type": "SYMBOL",

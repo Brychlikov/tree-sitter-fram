@@ -8,6 +8,7 @@ enum TokenType {
   BLOCK_COMMENT_START,
   BLOCK_COMMENT_TAG,
   BLOCK_COMMENT_REST,
+  BLOCK_COMMENT_UNFINISHED,
   ERROR_SENTINEL,
 };
 
@@ -17,6 +18,7 @@ typedef struct Scanner {
     // null-terminated array of unicode code points
     int32_t tag[MAX_TAG_LENGTH + 1];
     bool tagOpen;
+    bool commentOpen;
 } Scanner;
 
 void *tree_sitter_fram_external_scanner_create() {
@@ -37,6 +39,7 @@ void tree_sitter_fram_external_scanner_deserialize(void *payload, char *buffer, 
     // tree-sitter requires us to zero-initialize the scanner regardless of buffer contents
     scanner->tag[0] = 0;
     scanner->tagOpen = false;
+    scanner->commentOpen = false;
 
     // if there actually is deserialization data, just memcpy it
     if(length == sizeof(Scanner)) {
@@ -74,6 +77,7 @@ static bool scan_block_comment_start(Scanner *scanner, TSLexer *lexer) {
     advance(lexer);
 
     scanner->tagOpen = true;
+    scanner->commentOpen = true;
     lexer->result_symbol = BLOCK_COMMENT_START;
     return true;
 
@@ -96,8 +100,17 @@ bool tree_sitter_fram_external_scanner_scan(void *payload, TSLexer *lexer, const
     Scanner *scanner = (Scanner *)payload;
 
 
-    // bail if we are in error recovery mode
+    // if we are in recovery mode and a comment is open, eat till the end of file
     if(valid_symbols[ERROR_SENTINEL]) {
+        // else just bail
+        if(!scanner->commentOpen) {
+            return false;
+        }
+
+        while(!lexer->eof(lexer)) {
+            advance(lexer);
+        }
+        lexer->result_symbol = BLOCK_COMMENT_UNFINISHED;
         return false;
     }
 
@@ -157,7 +170,8 @@ bool tree_sitter_fram_external_scanner_scan(void *payload, TSLexer *lexer, const
     // search loop
     while(true) {
         if(lexer->eof(lexer)) {
-            return false;
+            lexer->result_symbol = BLOCK_COMMENT_UNFINISHED;
+            return true;
         }
         ringbuf[ri] = lexer->lookahead;
         advance(lexer);
@@ -165,6 +179,7 @@ bool tree_sitter_fram_external_scanner_scan(void *payload, TSLexer *lexer, const
         ri = (ri + 1) % rlen;
         if(matching == rlen) {
             scanner->tagOpen = false;
+            scanner->commentOpen = false;
             lexer->result_symbol = BLOCK_COMMENT_REST;
             return true;
         }

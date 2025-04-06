@@ -19,7 +19,7 @@ module.exports = grammar({
     /\s/,
   ],
 
-  externals: $ => [$.block_comment_start, $.block_comment_tag, $.block_comment_rest, $.error_sentinel],
+  externals: $ => [$.block_comment_start, $.block_comment_tag, $.block_comment_rest, $.block_comment_unfinished, $.error_sentinel],
 
   rules: {
     // TODO: add the actual grammar rules
@@ -64,7 +64,7 @@ module.exports = grammar({
     def_list: $ => repeat1($._def),
     _def: $ => prec.left(11, choice( 
       $.def_let,
-      $.def_implicit,
+      $.def_parameter,
       $.def_data,
       $.def_data_record,
       // $.def_label,
@@ -103,7 +103,7 @@ module.exports = grammar({
 
     def_handle_with: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "with", $._expr),
 
-    def_implicit: $ => seq("implicit", $.tlid, optional($.implicit_ty_args), optional($.type_annot)),
+    def_parameter: $ => seq("parameter", $._field),
 
     import_path_rel: $ => seq($.uid, repeat(seq("/", $.uid))),
     import_path_abs: $ => seq("/", $.uid, repeat(seq("/", $.uid))),

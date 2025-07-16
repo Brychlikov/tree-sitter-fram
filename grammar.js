@@ -11,13 +11,12 @@ module.exports = grammar({
   name: "fram",
 
   word: $ => $.lid,
-
-  extras: $ => [
-    $.block_comment,
-    $.line_comment,
-    $.line_doc_comment,
-    /\s/,
-  ],
+   extras: $ => [
+     $.block_comment,
+     $.line_comment,
+     $.line_doc_comment,
+     /\\s/,
+   ],
 
   externals: $ => [$.block_comment_start, $.block_comment_tag, $.block_comment_rest, $.block_comment_unfinished, $.error_sentinel],
 
@@ -63,9 +62,10 @@ module.exports = grammar({
 
     def_list: $ => repeat1($._def),
     _def: $ => prec.left(11, choice( 
-      $.def_let,
-      $.def_parameter,
-      $.def_data,
+       $.def_let,
+       $.def_parameter,
+       $.def_implicit,
+      $.def_implicit,      $.def_data,
       $.def_data_record,
       // $.def_label,
       $.def_handle,
@@ -104,6 +104,8 @@ module.exports = grammar({
     def_handle_with: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "with", $._expr),
 
     def_parameter: $ => seq("parameter", $._field),
+
+    def_implicit: $ => seq("implicit", $._name),
 
     import_path_rel: $ => seq($.uid, repeat(seq("/", $.uid))),
     import_path_abs: $ => seq("/", $.uid, repeat(seq("/", $.uid))),

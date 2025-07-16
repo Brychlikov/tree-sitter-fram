@@ -2276,10 +2276,19 @@
     },
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "\\\\s"
+    },
+    {
+      "type": "STRING",
+      "value": "implicit"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "lid",
+      null
+    ]
+  ],
   "precedences": [],
   "externals": [
     {

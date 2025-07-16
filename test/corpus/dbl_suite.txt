@@ -83,22 +83,51 @@ let x = id (fn y => y) ()
 
 =====
 ok0005_let.fram
-:skip
 =====
 let x =
   let y = (fn z => z) () in
   y
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_def_list
+        (def_list
+          (def_let
+            (lid)
+            (ex_app
+              (ex_fn
+                (lid)
+                (lid))
+              (ctor_unit))))
+        (lid)))))
 
 =====
 ok0006_fnArg.fram
-:skip
 =====
 let f = fn g => fn x => g x
 let x = f (fn x => x) ()
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (ex_fn
+          (lid)
+          (ex_app
+            (lid)
+            (lid)))))
+    (def_let
+      (lid)
+      (ex_app
+        (lid)
+        (ex_fn
+          (lid)
+          (lid))
+        (ctor_unit)))))
 
 =====
 ok0007_letArg.fram
@@ -142,7 +171,6 @@ let _ = handle id = effect x / r => r x in id ()
 
 =====
 ok0009_purityRestriction.fram
-:skip
 =====
 let id =
   let id2 = fn x => x in
@@ -150,7 +178,26 @@ let id =
 
 let _ = id id ()
 -----
-(source_file)
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_def_list
+        (def_list
+          (def_let
+            (lid)
+            (ex_fn
+              (lid)
+              (lid))))
+        (ex_app
+          (lid)
+          (lid))))
+    (def_let
+      (wildcard)
+      (ex_app
+        (lid)
+        (lid)
+        (ctor_unit)))))
 
 =====
 ok0010_implicit.fram
@@ -339,7 +386,6 @@ let _ =
 
 =====
 ok0017_wildcard.fram
-:skip
 =====
 let _ = match () with _ => () end
 -----
@@ -347,7 +393,6 @@ let _ = match () with _ => () end
 
 =====
 ok0018_namePattern.fram
-:skip
 =====
 implicit ~n
 
@@ -362,7 +407,6 @@ let _ =
 
 =====
 ok0019_simplePattern.fram
-:skip
 =====
 data Col = R | G | B
 
@@ -377,7 +421,6 @@ let rot = fn c =>
 
 =====
 ok0020_patternMatch.fram
-:skip
 =====
 data A = C1 | C2
 
@@ -395,7 +438,6 @@ let _ = foo (Y C2)
 
 =====
 ok0021_simpleMatch.fram
-:skip
 =====
 data A = A
 data B = B
@@ -406,7 +448,6 @@ let _ = match A with A => B end
 
 =====
 ok0022_deepMatch.fram
-:skip
 =====
 data A = A | T
 data P = P of A, A
@@ -424,7 +465,6 @@ let _ = foo (P T A)
 
 =====
 ok0023_letPattern.fram
-:skip
 =====
 data T = X | Y
 data P = P of T, T
@@ -435,7 +475,6 @@ let P x y = P X Y
 
 =====
 ok0024_letFunc.fram
-:skip
 =====
 let id x = x
 -----
@@ -443,7 +482,6 @@ let id x = x
 
 =====
 ok0025_letFuncImplicit.fram
-:skip
 =====
 implicit ~f
 
@@ -458,7 +496,6 @@ let _ =
 
 =====
 ok0026_funSugar.fram
-:skip
 =====
 let foo f x = f x x
 let bar g = foo (fn x y => g y x) ()
@@ -468,7 +505,6 @@ let _ = bar (fn x y => x)
 
 =====
 ok0027_explicitApp.fram
-:skip
 =====
 implicit ~n
 let foo = ~n
@@ -478,7 +514,6 @@ let _ = foo { ~n = () }
 
 =====
 ok0028_patArg.fram
-:skip
 =====
 data Bool = True | False
 data P = P of Bool, Bool
@@ -489,7 +524,6 @@ let fst (P x _) = x
 
 =====
 ok0029_handle.fram
-:skip
 =====
 let f p = p
 
@@ -506,7 +540,6 @@ let tauto _ =
 
 =====
 ok0030_bt.fram
-:skip
 =====
 data Bool = False | True
 
@@ -602,7 +635,6 @@ data Option X =
 
 =====
 ok0033_higherKinds.fram
-:skip
 =====
 data Option X =
 | None
@@ -622,7 +654,6 @@ let run s0 (ST m) =
 
 =====
 ok0034_schemes.fram
-:skip
 =====
 data Bool = False | True
 data A = A of (({~x : Bool} -> Bool) ->[] Bool)
@@ -633,7 +664,6 @@ let foo (A g) = g ~x
 
 =====
 ok0035_schemes.fram
-:skip
 =====
 data T X = T of (({type Y} -> Y) -> X)
 
@@ -643,7 +673,6 @@ let foo = T (fn em => em)
 
 =====
 ok0036_schemeAnnot.fram
-:skip
 =====
 let foo (id : {type X} -> X -> X) = id id
 let _ = foo (fn x => x) ()
@@ -652,7 +681,6 @@ let _ = foo (fn x => x) ()
 
 =====
 ok0037_checkScheme.fram
-:skip
 =====
 let foo (f : (({type X} -> X) -> _) -> _) =
   f (fn (x : {type Y} -> _) => x)
@@ -661,7 +689,6 @@ let foo (f : (({type X} -> X) -> _) -> _) =
 
 =====
 ok0038_explicitArg.fram
-:skip
 =====
 let id {type X} (x : X) = x
 -----
@@ -669,7 +696,6 @@ let id {type X} (x : X) = x
 
 =====
 ok0039_polymorphicImplicit.fram
-:skip
 =====
 let foo {~id : {type X} -> X -> X} = ~id ()
 
@@ -683,7 +709,6 @@ let _ = foo
 
 =====
 ok0040_polymorphicFields.fram
-:skip
 =====
 data I = I of ({type X} -> X -> X)
 
@@ -695,7 +720,6 @@ let bar = foo (I (fn x => x))
 
 =====
 ok0041_existentialTypes.fram
-:skip
 =====
 data Option X =
 | None
@@ -736,7 +760,6 @@ let view (Stream s f) =
 
 =====
 ok0042_existentialTypes.fram
-:skip
 =====
 data Ex = Ex of {type X}, X
 
@@ -746,7 +769,6 @@ let foo (f : {type A} -> A -> A) (Ex x) = Ex (f x)
 
 =====
 ok0043_implicitCtorArgs.fram
-:skip
 =====
 data Vec X Y = Vec of { ~x : X, ~y : Y }
 
@@ -756,7 +778,6 @@ let foo f Vec = f ~x ~y
 
 =====
 ok0044_implicitCtorArgs.fram
-:skip
 =====
 data Vec X Y = Vec of { ~x : X, ~y : Y }
 
@@ -768,7 +789,6 @@ let foo (Vec { ~x, ~y = Box v }) = ~x v
 
 =====
 ok0045_recursiveData.fram
-:skip
 =====
 data rec List X =
 | Nil
@@ -786,7 +806,6 @@ let _ = tl (Cons () (Cons () (Cons () Nil)))
 
 =====
 ok0046_mutualDataRec.fram
-:skip
 =====
 rec
   data Tree X = Node of X, TreeList X
@@ -799,7 +818,6 @@ end
 
 =====
 ok0047_namedParam.fram
-:skip
 =====
 data Vec X = Vec of { x : X, y : X }
 
@@ -810,7 +828,6 @@ let get_y (Vec { y }) = y
 
 =====
 ok0048_explicitTypeInst.fram
-:skip
 =====
 let id {X} (x : X) = x
 
@@ -820,7 +837,6 @@ let id2 {X} = id {X=X->X} (id {X})
 
 =====
 ok0049_expilicitInstOrder.fram
-:skip
 =====
 data Pair X Y = Pair of X, Y
 
@@ -830,7 +846,6 @@ let swap {A,B} (Pair x y) = Pair {Y=A,X=B} y x
 
 =====
 ok0050_typeArgRename.fram
-:skip
 =====
 let id {X=Y} (x : Y) = x
 
@@ -840,7 +855,6 @@ let id2 {Z} = id {X=Z}
 
 =====
 ok0051_existentialTypePattern.fram
-:skip
 =====
 data Pair X Y = Pair of X, Y
 
@@ -858,7 +872,6 @@ let suffixes {X=Z} (Stream {St=X} st f) =
 
 =====
 ok0052_emptyMatch.fram
-:skip
 =====
 data Empty =
 
@@ -873,7 +886,6 @@ let foo x = C (ofEmpty x)
 
 =====
 ok0053_firstClassHandler.fram
-:skip
 =====
 let hId = handler effect x / r => r x end
 
@@ -885,7 +897,6 @@ let _ = id ()
 
 =====
 ok0054_firstClassHandler.fram
-:skip
 =====
 let runH {A} h (f : {E} -> (A ->[|E] A) ->[|E] _) =
   handle x with h in
@@ -897,7 +908,6 @@ let _ = runH (handler effect x / r => r () end) (fn op => op ())
 
 =====
 ok0055_complexHandlers.fram
-:skip
 =====
 data Unit = I
 
@@ -920,7 +930,6 @@ let hState s =
 
 =====
 ok0056_complexHandlers.fram
-:skip
 =====
 data Unit = I
 
@@ -945,7 +954,6 @@ let hState s =
 
 =====
 ok0057_dataArgLabels.fram
-:skip
 =====
 data Unit = I
 
@@ -970,7 +978,6 @@ let hState s =
 
 =====
 ok0058_unitState.fram
-:skip
 =====
 data Unit = I
 
@@ -987,7 +994,6 @@ let unitStateCap = State {effect = [], get = id, put = id}
 
 =====
 ok0059_effectArg.fram
-:skip
 =====
 let id {effect} x = x
 
@@ -999,7 +1005,6 @@ let hId = handler id2 end
 
 =====
 ok0060_returnFinally.fram
-:skip
 =====
 data Unit = I
 
@@ -1022,7 +1027,6 @@ let hState (comp : {effect=E} -> State E _ ->[E|_] _) initSt =
 
 =====
 ok0061_returnFinallyMatch.fram
-:skip
 =====
 data T = A | B
 
@@ -1039,7 +1043,6 @@ let _ =
 
 =====
 ok0062_theLabel.fram
-:skip
 =====
 let theLabel {effect} {label=x} = x
 -----
@@ -1047,7 +1050,6 @@ let theLabel {effect} {label=x} = x
 
 =====
 ok0064_typeAnnot.fram
-:skip
 =====
 data T = A
 
@@ -1060,7 +1062,6 @@ let _ = foo (fn id => id id A)
 
 =====
 ok0066_method.fram
-:skip
 =====
 data Vec T = Vec of { x : T, y : T }
 
@@ -1073,7 +1074,6 @@ let swap (v : Vec _) = Vec { x = v.y, y = v.x }
 
 =====
 ok0067_pureMethod.fram
-:skip
 =====
 data T = A
 data U = B
@@ -1092,7 +1092,6 @@ let bar = Pair (poly.snd A) (poly.snd B)
 
 =====
 ok0068_shadowCtors.fram
-:skip
 =====
 data T = C
 data S = C
@@ -1106,7 +1105,6 @@ let f (x : T) =
 
 =====
 ok0069_effectCtorArg.fram
-:skip
 =====
 data T (effect E) = C of (Unit ->[E] Unit)
 
@@ -1116,7 +1114,6 @@ let f {E} (C g : T E) = g
 
 =====
 ok0070_effectMethodArg.fram
-:skip
 =====
 data State (effect E) X = State of
   { get : Unit ->[E] X
@@ -1137,7 +1134,6 @@ method updateTwice {E, self : State E _} f =
 
 =====
 ok0071_numbers.fram
-:skip
 =====
 let _ = 0
 let _ = 0x123
@@ -1153,7 +1149,6 @@ let _ = foo 13
 
 =====
 ok0072_strings.fram
-:skip
 =====
 let _ = ""
 let _ = "'"
@@ -1171,7 +1166,6 @@ let _ = foo "42"
 
 =====
 ok0073_extern.fram
-:skip
 =====
 let addInt = extern dbl_addInt : Int -> Int -> Int
 
@@ -1181,7 +1175,6 @@ let _ = addInt 13 42
 
 =====
 ok0074_implicitWithType.fram
-:skip
 =====
 data State (effect E) X = State of
   { get : Unit ->[E] X
@@ -1199,7 +1192,6 @@ let update f = ~st.put (f (~st.get ()))
 
 =====
 ok0075_effectsFromImplicits.fram
-:skip
 =====
 data StateSig (effect E) X = State of
   { get : Unit ->[E] X
@@ -1242,7 +1234,6 @@ let not x = if x then False else True
 
 =====
 ok0077_effectResume.fram
-:skip
 =====
 let h = handler effect x => resume x end
 -----
@@ -1250,7 +1241,6 @@ let h = handler effect x => resume x end
 
 =====
 ok0078_unitMethods.fram
-:skip
 =====
 method unit { self = () } = ()
 
@@ -1260,7 +1250,6 @@ let _ = ().unit
 
 =====
 ok0079_impureMethod.fram
-:skip
 =====
 data U = I
 
@@ -1272,7 +1261,6 @@ let baz I (x : U) = x.foo
 
 =====
 ok0080_moduleDef.fram
-:skip
 =====
 module X
   let     f x = x
@@ -1288,7 +1276,6 @@ let z = id x
 
 =====
 ok0081_nestedModule.fram
-:skip
 =====
 module Z
   pub let id x = x
@@ -1311,7 +1298,6 @@ let y = id x
 
 =====
 ok0082_moduleDataDef.fram
-:skip
 =====
 module X
   pub data T     = C
@@ -1340,7 +1326,6 @@ let s (n : N) = S n
 
 =====
 ok0083_pubPatternMatch.fram
-:skip
 =====
 data P = P of Int, Int
 data R = R of { x : Int }
@@ -1363,7 +1348,6 @@ let z = foo ()
 
 =====
 ok0084_operators.fram
-:skip
 =====
 let (+) = (extern dbl_addInt : Int -> Int -> Int)
 let (-) = (extern dbl_subInt : Int -> Int -> Int)
@@ -1376,7 +1360,6 @@ let z = -5
 
 =====
 ok0085_letChecked.fram
-:skip
 =====
 let f x =
   let y =
@@ -1389,7 +1372,6 @@ let f x =
 
 =====
 ok0086_optionState.fram
-:skip
 =====
 data Option A = None | Some of A
 
@@ -1428,7 +1410,6 @@ let _ =
 
 =====
 ok0087_opratorOverloading.fram
-:skip
 =====
 method add = (extern dbl_addInt : Int -> Int -> Int) self
 method add = (extern dbl_strCat : String -> String -> String) self
@@ -1442,7 +1423,6 @@ let _ = "a" + "b"
 
 =====
 ok0088_abstractData.fram
-:skip
 =====
 module M
   abstr data T = C | D
@@ -1454,7 +1434,6 @@ let f (x : M.T) = x
 
 =====
 ok0089_pubPat.fram
-:skip
 =====
 module M
   data Pair X Y = Pair of X, Y
@@ -1468,7 +1447,6 @@ let x = M.x
 
 =====
 ok0090_lists.fram
-:skip
 =====
 data rec List X = [] | (::) of X, List X
 
@@ -1494,7 +1472,6 @@ let dup_hd xs =
 
 =====
 ok0091_namedParamMethod.fram
-:skip
 =====
 data rec List A = Nil | Cons of A, List A
 
@@ -1523,7 +1500,6 @@ let _ = x.toString
 
 =====
 ok0092_multipleNamedMethodParams.fram
-:skip
 =====
 data Pair A B = (,) of A, B
 
@@ -1542,7 +1518,6 @@ let _ = (13, 42).toString-----
 
 =====
 ok0093_specialBinops.fram
-:skip
 =====
 let printStrLn = extern dbl_printStrLn : String ->[IO] Unit
 let printStr   = extern dbl_printStr   : String ->[IO] Unit
@@ -1594,7 +1569,6 @@ let _ = printStr "semi"; printStrLn "colon"
 
 =====
 ok0094_unaryIf.fram
-:skip
 =====
 let printStrLn = extern dbl_printStrLn : String ->[IO] Unit
 let printStr   = extern dbl_printStr   : String ->[IO] Unit
@@ -1614,14 +1588,12 @@ let _ =
 
 =====
 ok0095_wildcardTypeParam.fram
-:skip
 =====
 data T _ =  A-----
 (source_file)
 
 =====
 ok0096_fixTypeAnnot.fram
-:skip
 =====
 data rec Fix (F : type -> type) = Fix of F (Fix F)
 -----
@@ -1629,7 +1601,6 @@ data rec Fix (F : type -> type) = Fix of F (Fix F)
 
 =====
 ok0097_recursion.fram
-:skip
 =====
 data rec List A = [] | (::) of A, List A
 
@@ -1645,7 +1616,6 @@ let _ = map (fn _ => ()) (map (fn _ => "a") [1,2,3])
 
 =====
 ok0098_mutualRecursion.fram
-:skip
 =====
 data rec Nat = Z | S of Nat
 data Bool = False | True
@@ -1670,7 +1640,6 @@ let _ = even (S (S (S (S (S Z)))))
 
 =====
 ok0099_nestedEffArrows.fram
-:skip
 =====
 let foo (f : Unit ->[] Unit ->[] Unit) = f () ()
 let foo (f : Unit ->[] ({X} -> X) -> Unit) = ()
@@ -1679,7 +1648,6 @@ let foo (f : Unit ->[] ({X} -> X) -> Unit) = ()
 
 =====
 ok0100_polymorphicRecursion.fram
-:skip
 =====
 data Sqr A = (,) of A, A
 data rec Tree A = Leaf | Node of Tree (Sqr A)
@@ -1695,7 +1663,6 @@ let rec (map : {A,B,E} -> (A ->[|E] B) -> Tree A ->[|E] Tree B) =
 
 =====
 ok0101_implicitParamsRecord.fram
-:skip
 =====
 data Vec _ = { x : Unit, y : Unit }
 
@@ -1705,7 +1672,6 @@ let swap (v : Vec _) = Vec { x = v.y, y = v.x }
 
 =====
 ok0102_simpleRecord.fram
-:skip
 =====
 data A = B | C
 
@@ -1717,7 +1683,6 @@ let swap (v : T) = T { x = v.y, y = v.x }
 
 =====
 ok0103_genericRecords.fram
-:skip
 =====
 data Vec T = { x : T, y : T }
 
@@ -1727,7 +1692,6 @@ let swap (v : Vec _) = Vec { x = v.y, y = v.x }
 
 =====
 ok0104_chars.fram
-:skip
 =====
 let _ = 'a'
 let _ = '''
@@ -1743,7 +1707,6 @@ let _ = foo '1'
 
 =====
 ok0105_recFunWithNamedParam.fram
-:skip
 =====
 let rec f {x} = x
 -----
@@ -1751,7 +1714,6 @@ let rec f {x} = x
 
 =====
 ok0106_recursiveMethod.fram
-:skip
 =====
 rec
   data List X = [] | (::) of X, List X
@@ -1767,7 +1729,6 @@ end
 
 =====
 ok0107_polymorphicRecursion.fram
-:skip
 =====
 data Sqr A = (,) of A, A
 data rec Tree A = Leaf | Node of Tree (Sqr A)
@@ -1782,7 +1743,6 @@ method rec map {A,B, self : Tree A} (f : A ->[|_] B) =
 
 =====
 ok0108_modulePattern.fram
-:skip
 =====
 data Bool = False | True
 
@@ -1824,7 +1784,6 @@ let f () = m.mem ()
 
 =====
 ok0109_fieldPattern.fram
-:skip
 =====
 data T = C of { S, x : Int }
 
@@ -1840,7 +1799,6 @@ let f (x : M.S) = x
 
 =====
 ok0110_publicModulePattern.fram
-:skip
 =====
 module M
   data T = C of { x : Int }
@@ -1853,7 +1811,6 @@ let x = M.N.x
 
 =====
 ok0111_optionalParams.fram
-:skip
 =====
 pub data Option A = None | Some of A
 pub method add = (extern dbl_addInt : Int -> Int -> Int) self
@@ -1884,7 +1841,6 @@ let a = h {x=Some 2}
 
 =====
 ok0112_pureRecord.fram
-:skip
 =====
 data Vec X = { x : X, y : X }
 
@@ -1897,7 +1853,6 @@ let _ = checkPure (fn (v : Vec Unit) => v.y)
 
 =====
 ok0113_pureMatchingNonrecUVar.fram
-:skip
 =====
 data T = C of _
 let get (C x) = x
@@ -1911,7 +1866,6 @@ let _ = C ()
 
 =====
 ok0114_pureTail.fram
-:skip
 =====
 data rec List X = [] | (::) of X, List X
 
@@ -1929,7 +1883,6 @@ let _ = checkPure (tail : List Unit -> List Unit)
 
 =====
 ok0115_purePatternMatching.fram
-:skip
 =====
 rec
   data Trie X = Node of X, TrieList X

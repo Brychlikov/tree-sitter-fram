@@ -38,7 +38,7 @@ module.exports = grammar({
     num64: _ => /(0[bB][01]+|0[oO][0-7]+|[0-9]+|0[xX][0-9a-fA-F]+)L/,
     // TODO: escapes
     str: _ => /".*"/,
-    chr: _ => /'.'/,
+    chr: _ => /'(\\.|.)'/,  // char literal: escape sequence or any single char
 
     line_comment: $ => seq("#", repeat($._line_comment_text), "\n"),
     line_doc_comment: $ => seq("##", repeat($._line_comment_text), "\n"),

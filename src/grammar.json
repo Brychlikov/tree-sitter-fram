@@ -98,7 +98,7 @@
     },
     "chr": {
       "type": "PATTERN",
-      "value": "'.'"
+      "value": "'(\\\\.|.)'"
     },
     "line_comment": {
       "type": "SEQ",
@@ -2304,5 +2304,6 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

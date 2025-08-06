@@ -155,7 +155,7 @@ let _ = id id ()
 =====
 ok0010_implicit.fram
 =====
-implicit ~a
+parameter ~a
 
 let foo = ~a
 
@@ -165,7 +165,7 @@ let _ =
 -----
 (source_file
   (def_list
-    (def_implicit (tlid))
+    (def_parameter (fld_name (tlid)))
     (def_let (lid) (tlid))
     (def_let (wildcard)
       (ex_def_list
@@ -178,7 +178,7 @@ let _ =
 =====
 ok0011_implicit.fram
 =====
-implicit ~id
+parameter ~id
 
 let id = fn x => ~id (~id x)
 
@@ -188,7 +188,7 @@ let _ =
 -----
 (source_file 
   (def_list
-    (def_implicit (tlid))
+    (def_parameter (fld_name (tlid)))
     (def_let
       (lid)
       (ex_fn

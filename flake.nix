@@ -14,7 +14,9 @@
     flake-utils.lib.eachSystem (import systems) (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs { inherit system; config = {
+          allowUnfree = true;
+        };};
       in
       {
         packages = flake-utils.lib.flattenTree { inherit (pkgs) hello; };
@@ -25,6 +27,7 @@
             tree-sitter
             nodejs_20 graphviz
             clang
+            claude-code
           ];
         };
       }

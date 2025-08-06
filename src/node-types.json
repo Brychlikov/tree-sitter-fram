@@ -572,6 +572,10 @@
         {
           "type": "def_rec",
           "named": true
+        },
+        {
+          "type": "def_type",
+          "named": true
         }
       ]
     }
@@ -782,6 +786,49 @@
       "types": [
         {
           "type": "def_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ty_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_app",
+          "named": true
+        },
+        {
+          "type": "ty_expr_arr",
+          "named": true
+        },
+        {
+          "type": "ty_expr_effect",
+          "named": true
+        },
+        {
+          "type": "ty_expr_type",
+          "named": true
+        },
+        {
+          "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_record",
+          "named": true
+        },
+        {
+          "type": "uid_path",
           "named": true
         }
       ]

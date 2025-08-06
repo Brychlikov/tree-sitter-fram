@@ -67,6 +67,7 @@ module.exports = grammar({
       $.def_parameter,
       $.def_data,
       $.def_data_record,
+      $.def_type,
       // $.def_label,
       $.def_handle,
       $.def_handle_with,
@@ -98,6 +99,8 @@ module.exports = grammar({
 
     def_data_record: $ => seq(optional($.data_vis), "data", optional("rec"), $._ty_expr, "=", $.ty_record),
     data_vis: $ => prec(2, choice("pub", "abstr")),
+
+    def_type: $ => prec(2, seq(optional("pub"), "type", $._ty_expr, "=", $._ty_expr)),  // type alias
 
     def_handle: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "=", $._expr, repeat($._h_clause)),
 

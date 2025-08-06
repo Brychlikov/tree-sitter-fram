@@ -119,6 +119,18 @@ module.exports = grammar({
     implicit_ty_args: $ => seq("{", repeat1($._ty_expr), "}"),
     type_annot: $ => seq(":", $._ty_expr),
 
+    // Kind expressions
+    _kind_expr: $ => choice(
+      $.kind_type,
+      $.kind_effect,
+      $.kind_arrow,
+      $.kind_wildcard,
+    ),
+    kind_type: $ => "type",
+    kind_effect: $ => "effect", 
+    kind_arrow: $ => prec.right(1, seq($._kind_expr, "->", $._kind_expr)),
+    kind_wildcard: $ => "_",
+
     h_return: $ => seq("return", $._expr, "=>", $._expr),
     h_finally: $ => seq("finally", $._expr, "=>", $._expr),
     _h_clause: $ => choice($.h_return, $.h_finally),
@@ -161,13 +173,15 @@ module.exports = grammar({
     ty_expr_arr: $ => prec.right(1, seq($._ty_expr, "->", $._ty_expr)),
     ty_expr_app: $ => prec.left(9, seq($._ty_expr, $._ty_expr)),
     _ty_expr_simple: $ => choice(
+      $.ty_kind_annot,  // prioritize kind annotations over general parentheses
       seq("(", $._ty_expr, ")"),
       $.ty_expr_wildcard,
       $.uid_path,
-      // $.ty_kind_annot,
       $.ty_effect,
       $.ty_record,
     ),
+
+    ty_kind_annot: $ => seq("(", $.uid, ":", $._kind_expr, ")"),  // (F : kind)
 
     ex_handler: $ => seq("handler", $._expr, repeat($._h_clause), "end"),
 
@@ -198,8 +212,10 @@ module.exports = grammar({
     ty_fld_anontype: $ => seq("type", $._ty_expr),
     ty_fld_effect: $ => "effect",
     ty_fld_effectval: $ => seq("effect", "=", $._ty_expr),
-    // ty_fld_type: $ => choice($.uid, /* TODO: kind expressions */),
-    ty_fld_type: $ => $.uid,
+    ty_fld_type: $ => choice(
+      $.uid,
+      seq($.uid, ":", $._kind_expr),  // kind-annotated type parameter
+    ),
     ty_fld_typeval: $ => seq($.uid, "=", $._ty_expr),
     ty_fld_name: $ => $._name,
     ty_fld_nameval: $ => seq($._name, ":", $._ty_expr),

@@ -980,6 +980,60 @@
         }
       ]
     },
+    "_kind_expr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kind_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kind_effect"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kind_arrow"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kind_wildcard"
+        }
+      ]
+    },
+    "kind_type": {
+      "type": "STRING",
+      "value": "type"
+    },
+    "kind_effect": {
+      "type": "STRING",
+      "value": "effect"
+    },
+    "kind_arrow": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_kind_expr"
+          },
+          {
+            "type": "STRING",
+            "value": "->"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_kind_expr"
+          }
+        ]
+      }
+    },
+    "kind_wildcard": {
+      "type": "STRING",
+      "value": "_"
+    },
     "h_return": {
       "type": "SEQ",
       "members": [
@@ -1288,6 +1342,10 @@
       "type": "CHOICE",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "ty_kind_annot"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -1319,6 +1377,31 @@
         {
           "type": "SYMBOL",
           "name": "ty_record"
+        }
+      ]
+    },
+    "ty_kind_annot": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "uid"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_kind_expr"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
@@ -1526,8 +1609,30 @@
       ]
     },
     "ty_fld_type": {
-      "type": "SYMBOL",
-      "name": "uid"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "uid"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "uid"
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_kind_expr"
+            }
+          ]
+        }
+      ]
     },
     "ty_fld_typeval": {
       "type": "SEQ",

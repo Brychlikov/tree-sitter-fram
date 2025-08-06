@@ -67,6 +67,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -127,6 +131,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -171,6 +179,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -821,6 +833,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -2285,6 +2301,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -2330,6 +2350,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -2439,6 +2463,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -2620,6 +2648,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -2915,6 +2947,48 @@
         }
       ]
     }
+  },
+  {
+    "type": "kind_arrow",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kind_arrow",
+          "named": true
+        },
+        {
+          "type": "kind_effect",
+          "named": true
+        },
+        {
+          "type": "kind_type",
+          "named": true
+        },
+        {
+          "type": "kind_wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "kind_effect",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kind_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kind_wildcard",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "line_comment",
@@ -3225,6 +3299,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -3265,6 +3343,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -3311,6 +3393,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -3351,6 +3437,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -3397,6 +3487,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -3437,6 +3531,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -3488,6 +3586,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -3533,6 +3635,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {
@@ -3630,6 +3736,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -3645,9 +3755,25 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "kind_arrow",
+          "named": true
+        },
+        {
+          "type": "kind_effect",
+          "named": true
+        },
+        {
+          "type": "kind_type",
+          "named": true
+        },
+        {
+          "type": "kind_wildcard",
+          "named": true
+        },
         {
           "type": "uid",
           "named": true
@@ -3688,6 +3814,10 @@
           "named": true
         },
         {
+          "type": "ty_kind_annot",
+          "named": true
+        },
+        {
           "type": "ty_record",
           "named": true
         },
@@ -3697,6 +3827,37 @@
         },
         {
           "type": "uid_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty_kind_annot",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kind_arrow",
+          "named": true
+        },
+        {
+          "type": "kind_effect",
+          "named": true
+        },
+        {
+          "type": "kind_type",
+          "named": true
+        },
+        {
+          "type": "kind_wildcard",
+          "named": true
+        },
+        {
+          "type": "uid",
           "named": true
         }
       ]
@@ -3771,6 +3932,10 @@
         },
         {
           "type": "ty_expr_wildcard",
+          "named": true
+        },
+        {
+          "type": "ty_kind_annot",
           "named": true
         },
         {

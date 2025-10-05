@@ -230,7 +230,7 @@ module.exports = grammar({
       $.ex_unop,
       $.ex_annot,
       $.ex_app,
-      $._ex_simple,
+      $._ex_simple,  // ex_pub is now available through _ex_simple
       $.ex_if,
       $.ex_if_no_else,
       $.ex_extern,
@@ -239,7 +239,7 @@ module.exports = grammar({
 
     ex_if: $ => prec(2,seq("if", $._expr, "then", $._expr, "else", $._expr)),
     ex_if_no_else: $ => seq("if", $._expr, "then", $._expr),
-    ex_pub: $ => seq( "pub", $._expr), 
+    ex_pub: $ => prec.right(5, seq("pub", $.lid)),  // public identifier pattern - lower precedence than definitions 
     ex_extern: $ => seq("extern", $.lid),
 
     _ex_simple: $ => choice(
@@ -253,15 +253,13 @@ module.exports = grammar({
       $.chr,
       $.ctor_nil,
       $.ctor_unit,
-      seq("(", $._expr, ")"),
+      seq("(", choice($._expr, $.ex_pub), ")"),  // allow pub only in parentheses
       $.ex_list,
       $.ex_match,
       $.ex_record,
       $.ex_handler,
       seq("(", $.op, ")"),
       seq("(", $.op, ".)"),
-      // TODO not ready for that can of worms
-      // $.ex_pub, 
 
     ),
 
@@ -300,7 +298,7 @@ module.exports = grammar({
       $.fld_anontype,
       $.fld_effect,
       $.fld_effectval,
-      $.fld_type,
+      $.fld_type,  // now handles kind annotations
       $.fld_typeval,
       $.fld_name,
       $.fld_nameval,
@@ -310,8 +308,10 @@ module.exports = grammar({
     fld_anontype: $ => seq("type", $._ty_expr),
     fld_effect: $ => "effect",
     fld_effectval: $ => seq("effect", "=", $._ty_expr),
-    // fld_type: $ => choice($.uid, /* TODO: kind expressions */),
-    fld_type: $ => $.uid,
+    fld_type: $ => choice(
+      $.uid,
+      seq($.uid, ":", $._kind_expr),  // kind-annotated type/effect parameter
+    ),
     fld_typeval: $ => seq($.uid, "=", $._ty_expr),
     fld_name: $ => $._name,
     fld_nameval: $ => seq($._name, "=", $._expr),

@@ -1776,17 +1776,21 @@
       ]
     },
     "ex_pub": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "pub"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expr"
-        }
-      ]
+      "type": "PREC_RIGHT",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "pub"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "lid"
+          }
+        ]
+      }
     },
     "ex_extern": {
       "type": "SEQ",
@@ -1910,6 +1914,10 @@
               "value": ".)"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ex_pub"
         }
       ]
     },
@@ -2335,8 +2343,30 @@
       ]
     },
     "fld_type": {
-      "type": "SYMBOL",
-      "name": "uid"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "uid"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "uid"
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_kind_expr"
+            }
+          ]
+        }
+      ]
     },
     "fld_typeval": {
       "type": "SEQ",

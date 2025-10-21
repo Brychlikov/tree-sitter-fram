@@ -1,0 +1,13 @@
+========
+Double single line comment
+========
+# #General definitions
+let foo = 53
+--------
+(source_file 
+  (line_comment)
+  (def_list
+    (def_let
+      (lid)
+      (num))))
+

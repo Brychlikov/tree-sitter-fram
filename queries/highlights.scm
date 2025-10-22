@@ -1,11 +1,11 @@
-;"abstr"    @keyword
+"abstr"    @keyword
 "as"       @keyword
 "data"     @keyword
 "effect"   @keyword
 ;"effrow"   @keyword
 "else"     @keyword
 "end"      @keyword
-;"extern"   @keyword
+"extern"   @keyword
 "finally"  @keyword
 "fn"       @keyword
 "handle"   @keyword
@@ -20,23 +20,24 @@
 "method"   @keyword
 "module"   @keyword
 "of"       @keyword
-;"open"     @keyword
-"pub"      @keyword
-"rec"      @keyword
+"open"     @keyword
+(pub)      @keyword
+(rec)      @keyword
 "return"   @keyword
-; "then"     @keyword
+"then"     @keyword
 "type"     @keyword
 "with"     @keyword
 "_"        @keyword
 (uid_path) @type
 
 (line_comment) @comment
-(line_doc_comment) @comment
+(line_doc_comment) @comment.documentation
 (block_comment) @comment
 (block_comment_start) @comment
 (block_comment_unfinished) @comment
 
 (num) @number
+(str) @string
 
 (def_let
   . (lid) @variable)
@@ -44,6 +45,9 @@
   . (ex_app . (lid) @function
               [(lid) @variable.parameter
               (ex_annot (lid) @variable.parameter)]*))
+
+(ex_app (lid) @function)
+
 
 (def_method . (lid) @function.method)
 (def_method . (ex_app . (lid) @function.method))

@@ -27,7 +27,6 @@
             tree-sitter
             nodejs_20 graphviz
             clang
-            claude-code
           ];
         };
       }

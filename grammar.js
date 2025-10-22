@@ -40,9 +40,8 @@ module.exports = grammar({
     str: _ => /".*"/,
     chr: _ => /'(\\.|.)'/,  // char literal: escape sequence or any single char
 
-    line_comment: $ => seq("#", repeat($._line_comment_text), "\n"),
-    line_doc_comment: $ => seq("##", repeat($._line_comment_text), "\n"),
-    _line_comment_text: $ => /./,
+    line_comment: _ => /#[^\n]*\n/,
+    line_doc_comment: _ => /##[^\n]*\n/,
     block_comment: $ => seq(
       $.block_comment_start,
       optional($.block_comment_tag),
@@ -60,6 +59,10 @@ module.exports = grammar({
     ),
     label: $ => "label",
     method: $ => seq("method", $.lid),
+
+    rec: $ => "rec",
+    pub: $ => "pub",
+    abstr: $ => "abstr",
 
     def_list: $ => repeat1($._def),
     _def: $ => prec.left(11, choice( 
@@ -82,29 +85,29 @@ module.exports = grammar({
       seq("(", $.op, optional("."), ")")
     )),
 
-    def_rec: $ => seq("rec", $.def_list, "end"),
+    def_rec: $ => seq($.rec, $.def_list, "end"),
 
     def_method: $ => choice(
-      seq(optional("pub"), "method", optional("rec"), $._expr, "=", $._expr),
-      seq(optional("pub"), "method", "fn", $.var_id, optional(seq("=", $.var_id))),
+      seq(optional($.pub), "method", optional($.rec), $._expr, "=", $._expr),
+      seq(optional($.pub), "method", "fn", $.var_id, optional(seq("=", $.var_id))),
     ),
 
-    def_module: $ => seq(optional("pub"), "module", optional("rec"), $.uid, $.def_list, "end"),
+    def_module: $ => seq(optional($.pub), "module", optional($.rec), $.uid, $.def_list, "end"),
 
-    def_open: $ => seq(optional("pub"), "open", $.uid_path),
+    def_open: $ => seq(optional($.pub), "open", $.uid_path),
 
-    def_let: $ => prec.left(11, seq(optional("pub"), "let", optional("rec"), $._expr,  "=", $._expr)),
+    def_let: $ => prec.left(11, seq(optional($.pub), "let", optional($.rec), $._expr,  "=", $._expr)),
 
-    def_data: $ => seq(optional($.data_vis), "data", optional("rec"), $._ty_expr, "=", optional("|"), optional($._ctor_decls1)),
+    def_data: $ => seq(optional($.data_vis), "data", optional($.rec), $._ty_expr, "=", optional("|"), optional($._ctor_decls1)),
 
-    def_data_record: $ => seq(optional($.data_vis), "data", optional("rec"), $._ty_expr, "=", $.ty_record),
-    data_vis: $ => prec(2, choice("pub", "abstr")),
+    def_data_record: $ => seq(optional($.data_vis), "data", optional($.rec), $._ty_expr, "=", $.ty_record),
+    data_vis: $ => prec(2, choice($.pub, "abstr")),
 
-    def_type: $ => prec(2, seq(optional("pub"), "type", $._ty_expr, "=", $._ty_expr)),  // type alias
+    def_type: $ => prec(2, seq(optional($.pub), "type", $._ty_expr, "=", $._ty_expr)),  // type alias
 
-    def_handle: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "=", $._expr, repeat($._h_clause)),
+    def_handle: $ => seq(optional($.pub), "handle", optional($.rec), $._expr, "=", $._expr, repeat($._h_clause)),
 
-    def_handle_with: $ => seq(optional("pub"), "handle", optional("rec"), $._expr, "with", $._expr),
+    def_handle_with: $ => seq(optional($.pub), "handle", optional($.rec), $._expr, "with", $._expr),
 
     def_parameter: $ => seq("parameter", $._field),
 
@@ -239,7 +242,7 @@ module.exports = grammar({
 
     ex_if: $ => prec(2,seq("if", $._expr, "then", $._expr, "else", $._expr)),
     ex_if_no_else: $ => seq("if", $._expr, "then", $._expr),
-    ex_pub: $ => prec.right(5, seq("pub", $.lid)),  // public identifier pattern - lower precedence than definitions 
+    ex_pub: $ => prec.right(5, seq($.pub, $.lid)),  // public identifier pattern - lower precedence than definitions 
     ex_extern: $ => seq("extern", $.lid),
 
     _ex_simple: $ => choice(

@@ -1,0 +1,4 @@
+let _ = if True then 0 else 1
+#        ^ keyword
+#                ^ keyword
+#                         ^ keyword

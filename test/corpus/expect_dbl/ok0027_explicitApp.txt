@@ -1,0 +1,8 @@
+==================
+ok0027_explicitApp.fram
+==================
+parameter ~n
+let foo = ~n
+let _ = foo { ~n = () }
+---
+

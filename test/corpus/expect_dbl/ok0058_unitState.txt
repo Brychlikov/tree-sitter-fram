@@ -1,0 +1,15 @@
+==================
+ok0058_unitState.fram
+==================
+data Unit = I
+
+data State E X = State of
+  { get : Unit ->[E] X
+  , put : X ->[E] Unit
+  }
+
+let id x = x
+
+let unitStateCap = State {E = [], get = id, put = id}
+---
+

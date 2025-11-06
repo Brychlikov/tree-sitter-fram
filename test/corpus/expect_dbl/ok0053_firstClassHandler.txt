@@ -1,0 +1,10 @@
+==================
+ok0053_firstClassHandler.fram
+==================
+let hId = handler effect x / r => r x end
+
+handle id with hId
+
+let _ = id ()
+---
+

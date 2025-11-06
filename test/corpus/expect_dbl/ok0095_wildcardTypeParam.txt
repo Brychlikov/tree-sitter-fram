@@ -1,0 +1,6 @@
+==================
+ok0095_wildcardTypeParam.fram
+==================
+data T _ =  A
+---
+

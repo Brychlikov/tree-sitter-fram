@@ -1,0 +1,63 @@
+==================
+ok0022_deepMatch.fram
+==================
+data A = A | T
+data P = P of A, A
+
+let foo = fn p =>
+  match p with
+  | P x T => x
+  | P T y => y
+  | _     => A
+  end
+
+let _ = foo (P T A)
+---
+
+(source_file
+  (def_list
+    (def_data
+      (uid_path
+        (uid))
+      (ctor_decl
+        (uid))
+      (ctor_decl
+        (uid)))
+    (def_data
+      (uid_path
+        (uid))
+      (ctor_decl
+        (uid)
+        (uid_path
+          (uid))
+        (uid_path
+          (uid))))
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (ex_match
+          (lid)
+          (match_clause
+            (ex_app
+              (uid)
+              (lid)
+              (uid))
+            (lid))
+          (match_clause
+            (ex_app
+              (uid)
+              (uid)
+              (lid))
+            (lid))
+          (match_clause
+            (wildcard)
+            (uid)))))
+    (def_let
+      (wildcard)
+      (ex_app
+        (lid)
+        (ex_app
+          (uid)
+          (uid)
+          (uid))))))

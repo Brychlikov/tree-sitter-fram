@@ -1,0 +1,38 @@
+==================
+ok0011_implicit.fram
+==================
+parameter ~id
+
+let id = fn x => ~id (~id x)
+
+let _ =
+  let ~id = fn y => y in
+  id ()
+---
+
+(source_file
+  (def_list
+    (def_parameter
+      (fld_name
+        (tlid)))
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (ex_app
+          (tlid)
+          (ex_app
+            (tlid)
+            (lid)))))
+    (def_let
+      (wildcard)
+      (ex_def_list
+        (def_list
+          (def_let
+            (tlid)
+            (ex_fn
+              (lid)
+              (lid))))
+        (ex_app
+          (lid)
+          (ctor_unit))))))

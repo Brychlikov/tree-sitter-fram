@@ -1,0 +1,11 @@
+==================
+ok0064_typeAnnot.fram
+==================
+data T = A
+
+let foo f =
+  (f : ({type A} -> A -> A) -> T) (fn x => x)
+
+let _ = foo (fn id => id id A)
+---
+

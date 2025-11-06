@@ -1,0 +1,8 @@
+==================
+ok0127_polymorphicParam.fram
+==================
+parameter ~id : {T} -> T -> T
+
+let id = ~id
+---
+

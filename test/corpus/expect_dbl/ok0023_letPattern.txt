@@ -1,0 +1,9 @@
+==================
+ok0023_letPattern.fram
+==================
+data T = X | Y
+data P = P of T, T
+
+let P x y = P X Y
+---
+

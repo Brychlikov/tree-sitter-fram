@@ -1,0 +1,13 @@
+==================
+ok0001_id.fram
+==================
+let id = fn x => x
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (lid)))))

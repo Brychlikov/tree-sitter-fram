@@ -1,0 +1,8 @@
+==================
+ok0050_typeArgRename.fram
+==================
+let id {X=Y} (x : Y) = x
+
+let id2 {Z} = id {X=Z}
+---
+

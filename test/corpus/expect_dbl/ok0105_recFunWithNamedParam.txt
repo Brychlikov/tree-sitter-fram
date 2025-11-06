@@ -1,0 +1,6 @@
+==================
+ok0105_recFunWithNamedParam.fram
+==================
+let rec f {x} = x
+---
+

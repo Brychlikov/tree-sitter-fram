@@ -1,0 +1,10 @@
+==================
+ok0054_firstClassHandler.fram
+==================
+let runH {A} h (f : {E} -> (A ->[E] A) ->[E] _) =
+  handle x with h in
+  f x
+
+let _ = runH (handler effect x / r => r () end) (fn op => op ())
+---
+

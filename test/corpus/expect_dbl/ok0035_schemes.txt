@@ -1,0 +1,8 @@
+==================
+ok0035_schemes.fram
+==================
+data T X = T of (({type Y} -> Y) -> X)
+
+let foo = T (fn em => em)
+---
+

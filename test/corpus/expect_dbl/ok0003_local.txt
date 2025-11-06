@@ -1,0 +1,22 @@
+==================
+ok0003_local.fram
+==================
+let x =
+  let id = fn x => x in
+  id ()
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_def_list
+        (def_list
+          (def_let
+            (lid)
+            (ex_fn
+              (lid)
+              (lid))))
+        (ex_app
+          (lid)
+          (ctor_unit))))))

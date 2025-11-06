@@ -1,0 +1,22 @@
+==================
+ok0005_let.fram
+==================
+let x =
+  let y = (fn z => z) () in
+  y
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_def_list
+        (def_list
+          (def_let
+            (lid)
+            (ex_app
+              (ex_fn
+                (lid)
+                (lid))
+              (ctor_unit))))
+        (lid)))))

@@ -1,0 +1,28 @@
+==================
+ok0021_simpleMatch.fram
+==================
+data A = A
+data B = B
+
+let _ = match A with A => B end
+---
+
+(source_file
+  (def_list
+    (def_data
+      (uid_path
+        (uid))
+      (ctor_decl
+        (uid)))
+    (def_data
+      (uid_path
+        (uid))
+      (ctor_decl
+        (uid)))
+    (def_let
+      (wildcard)
+      (ex_match
+        (uid)
+        (match_clause
+          (uid)
+          (uid))))))

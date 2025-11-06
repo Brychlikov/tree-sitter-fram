@@ -1,0 +1,28 @@
+==================
+ok0010_implicit.fram
+==================
+parameter ~a
+
+let foo = ~a
+
+let _ =
+  let ~a = () in
+  foo
+---
+
+(source_file
+  (def_list
+    (def_parameter
+      (fld_name
+        (tlid)))
+    (def_let
+      (lid)
+      (tlid))
+    (def_let
+      (wildcard)
+      (ex_def_list
+        (def_list
+          (def_let
+            (tlid)
+            (ctor_unit)))
+        (lid)))))

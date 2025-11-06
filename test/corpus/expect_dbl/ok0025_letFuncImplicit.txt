@@ -1,0 +1,13 @@
+==================
+ok0025_letFuncImplicit.fram
+==================
+parameter ~f
+
+let foo x = ~f x
+
+let ~f x = x
+
+let _ =
+  foo ()
+---
+

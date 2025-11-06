@@ -1,0 +1,15 @@
+==================
+ok0029_handle.fram
+==================
+let f p = p
+
+parameter ~f
+
+let test f =
+  f (~f ())
+
+let tauto _ =
+  handle x = effect x / r => ()
+  in test {~f=x} f
+---
+

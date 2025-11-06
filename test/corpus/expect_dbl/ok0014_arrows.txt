@@ -1,0 +1,10 @@
+==================
+ok0014_arrows.fram
+==================
+data X = I
+
+data T =
+| Pure   of (X -> X)
+| Impure of (X ->[] X)
+---
+

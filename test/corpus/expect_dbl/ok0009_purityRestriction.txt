@@ -1,0 +1,30 @@
+==================
+ok0009_purityRestriction.fram
+==================
+let id =
+  let id2 = fn x => x in
+  id2 id2
+
+let _ = id id ()
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_def_list
+        (def_list
+          (def_let
+            (lid)
+            (ex_fn
+              (lid)
+              (lid))))
+        (ex_app
+          (lid)
+          (lid))))
+    (def_let
+      (wildcard)
+      (ex_app
+        (lid)
+        (lid)
+        (ctor_unit)))))

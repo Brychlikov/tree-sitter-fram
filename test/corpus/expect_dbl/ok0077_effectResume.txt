@@ -1,0 +1,6 @@
+==================
+ok0077_effectResume.fram
+==================
+let h = handler effect x => resume x end
+---
+

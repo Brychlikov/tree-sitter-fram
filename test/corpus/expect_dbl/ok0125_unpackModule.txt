@@ -1,0 +1,8 @@
+==================
+ok0125_unpackModule.fram
+==================
+data T = T of { U }
+let mk = T { U = Unit }
+let T { module U } = mk
+---
+

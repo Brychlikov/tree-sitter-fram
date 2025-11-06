@@ -1,0 +1,17 @@
+==================
+ok0074_implicitWithType.fram
+==================
+data State E X = State of
+  { get : Unit ->[E] X
+  , put : X ->[E] Unit
+  }
+
+method get {E} (State { get } : State E _) = get
+method put {E} (State { put } : State E _) = put
+
+parameter State_Eff
+parameter ~st : State State_Eff _
+
+let update f = ~st.put (f (~st.get ()))
+---
+

@@ -1,0 +1,10 @@
+==================
+ok0133_uvarAlias.fram
+==================
+let f x =
+  type T = _
+  let id (y : T) = y
+  in
+  id x
+---
+

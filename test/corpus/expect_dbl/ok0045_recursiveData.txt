@@ -1,0 +1,16 @@
+==================
+ok0045_recursiveData.fram
+==================
+data rec List X =
+| Nil
+| Cons of X, List X
+
+let tl xs =
+  match xs with
+  | Nil       => Nil
+  | Cons _ xs => xs
+  end
+
+let _ = tl (Cons () (Cons () (Cons () Nil)))
+---
+

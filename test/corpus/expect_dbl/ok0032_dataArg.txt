@@ -1,0 +1,8 @@
+==================
+ok0032_dataArg.fram
+==================
+data Option X =
+| None
+| Some of X
+---
+

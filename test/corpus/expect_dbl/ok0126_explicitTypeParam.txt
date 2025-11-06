@@ -1,0 +1,8 @@
+==================
+ok0126_explicitTypeParam.fram
+==================
+parameter x
+
+let foo {T} (f : _ ->[_] T) = f x
+---
+

@@ -1,0 +1,13 @@
+==================
+ok0100_polymorphicRecursion.fram
+==================
+data Sqr A = (,) of A, A
+data rec Tree A = Leaf | Node of Tree (Sqr A)
+
+let rec map {A,B,E} (f : A ->[E] B) (t : Tree A) =
+  match t with
+  | Leaf   => Leaf
+  | Node t => Node (map (fn (x, y) => (f x, f y)) t)
+  end : Tree B
+---
+

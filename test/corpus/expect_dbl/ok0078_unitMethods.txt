@@ -1,0 +1,8 @@
+==================
+ok0078_unitMethods.fram
+==================
+method unit () = ()
+
+let _ = ().unit
+---
+

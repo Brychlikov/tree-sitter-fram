@@ -1,0 +1,12 @@
+==================
+ok0121_adtsInModules.fram
+==================
+module M
+  pub module N
+    pub data T = C
+  end
+end
+
+let f (C : M.N.T) = M.N.C
+---
+

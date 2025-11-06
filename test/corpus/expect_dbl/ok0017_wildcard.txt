@@ -1,0 +1,15 @@
+==================
+ok0017_wildcard.fram
+==================
+let _ = match () with _ => () end
+---
+
+(source_file
+  (def_list
+    (def_let
+      (wildcard)
+      (ex_match
+        (ctor_unit)
+        (match_clause
+          (wildcard)
+          (ctor_unit))))))

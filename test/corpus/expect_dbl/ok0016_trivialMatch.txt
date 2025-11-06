@@ -1,0 +1,22 @@
+==================
+ok0016_trivialMatch.fram
+==================
+let _ =
+  match fn x => x with
+  | f => f
+  end ()
+---
+
+(source_file
+  (def_list
+    (def_let
+      (wildcard)
+      (ex_app
+        (ex_match
+          (ex_fn
+            (lid)
+            (lid))
+          (match_clause
+            (lid)
+            (lid)))
+        (ctor_unit)))))

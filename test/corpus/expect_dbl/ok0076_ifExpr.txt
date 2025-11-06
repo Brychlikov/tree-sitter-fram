@@ -1,0 +1,8 @@
+==================
+ok0076_ifExpr.fram
+==================
+data Bool = True | False
+
+let not x = if x then False else True
+---
+

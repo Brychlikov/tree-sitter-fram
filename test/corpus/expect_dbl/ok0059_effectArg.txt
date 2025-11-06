@@ -1,0 +1,10 @@
+==================
+ok0059_effectArg.fram
+==================
+let id {E : effect} x = x
+
+let id2 {E = X} = id {E = X}
+
+let hId = handler id2 end
+---
+

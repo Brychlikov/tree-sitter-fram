@@ -1,0 +1,10 @@
+==================
+ok0044_implicitCtorArgs.fram
+==================
+data Vec X Y = Vec of { ~x : X, ~y : Y }
+
+data Box X = Box of X
+
+let foo (Vec { ~x, ~y = Box v }) = ~x v
+---
+

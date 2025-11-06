@@ -1,0 +1,8 @@
+==================
+ok0103_genericRecords.fram
+==================
+data Vec T = { x : T, y : T }
+
+let swap (v : Vec _) = Vec { x = v.y, y = v.x }
+---
+

@@ -1,0 +1,22 @@
+==================
+ok0004_fnArg.fram
+==================
+let id = fn x => x
+let x = id (fn y => y) ()
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (lid)))
+    (def_let
+      (lid)
+      (ex_app
+        (lid)
+        (ex_fn
+          (lid)
+          (lid))
+        (ctor_unit)))))

@@ -1,0 +1,18 @@
+==================
+ok0015_ctor.fram
+==================
+data A =
+| A
+
+data B =
+| B of A
+
+data C =
+| C of (A -> B), A
+
+data D =
+| D of (A ->[] C)
+
+let _ = D (C B)
+---
+

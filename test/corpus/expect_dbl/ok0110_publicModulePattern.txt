@@ -1,0 +1,11 @@
+==================
+ok0110_publicModulePattern.fram
+==================
+module M
+  data T = C of { x : Int }
+  pub let C { module N } = C { x = 42 }
+end
+
+let x = M.N.x
+---
+

@@ -1,0 +1,24 @@
+==================
+ok0007_letArg.fram
+==================
+let x = (fn x => ()) (let f = fn x => x in f ())
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_app
+        (ex_fn
+          (lid)
+          (ctor_unit))
+        (ex_def_list
+          (def_list
+            (def_let
+              (lid)
+              (ex_fn
+                (lid)
+                (lid))))
+          (ex_app
+            (lid)
+            (ctor_unit)))))))

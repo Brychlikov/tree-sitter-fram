@@ -1,0 +1,7 @@
+==================
+ok0099_nestedEffArrows.fram
+==================
+let foo (f : Unit ->[] Unit ->[] Unit) = f () ()
+let foo (f : Unit ->[] ({X} -> X) -> Unit) = ()
+---
+

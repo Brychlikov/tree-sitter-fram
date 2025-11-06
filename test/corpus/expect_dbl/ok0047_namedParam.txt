@@ -1,0 +1,9 @@
+==================
+ok0047_namedParam.fram
+==================
+data Vec X = Vec of { x : X, y : X }
+
+let get_x (Vec { x }) = x
+let get_y (Vec { y }) = y
+---
+

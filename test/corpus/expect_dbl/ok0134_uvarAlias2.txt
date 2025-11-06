@@ -1,0 +1,11 @@
+==================
+ok0134_uvarAlias2.fram
+==================
+let f x =
+  type T = _
+  type U = T
+  let (a : T) = x in
+  let (b : U) = a in
+  b
+---
+

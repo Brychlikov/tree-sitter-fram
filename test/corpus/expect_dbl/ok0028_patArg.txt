@@ -1,0 +1,9 @@
+==================
+ok0028_patArg.fram
+==================
+data Bool = True | False
+data P = P of Bool, Bool
+
+let fst (P x _) = x
+---
+

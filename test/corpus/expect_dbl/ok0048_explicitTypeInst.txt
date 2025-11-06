@@ -1,0 +1,8 @@
+==================
+ok0048_explicitTypeInst.fram
+==================
+let id {X} (x : X) = x
+
+let id2 {X} = id {X=X->X} (id {X})
+---
+

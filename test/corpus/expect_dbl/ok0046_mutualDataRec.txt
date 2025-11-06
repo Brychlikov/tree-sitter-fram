@@ -1,0 +1,11 @@
+==================
+ok0046_mutualDataRec.fram
+==================
+rec
+  data Tree X = Node of X, TreeList X
+  data TreeList X =
+    | Nil
+    | Cons of Tree X, TreeList X
+end
+---
+

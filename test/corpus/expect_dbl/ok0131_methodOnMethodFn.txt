@@ -1,0 +1,10 @@
+==================
+ok0131_methodOnMethodFn.fram
+==================
+parameter T
+parameter U
+let (- .) {method neg : T ->[] U} (x : T) = x.neg
+method neg (self : Int) = self
+let baz = (-42).neg
+---
+

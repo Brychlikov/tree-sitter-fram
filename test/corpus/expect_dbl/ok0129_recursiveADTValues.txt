@@ -1,0 +1,8 @@
+==================
+ok0129_recursiveADTValues.fram
+==================
+data Loop = Loop of (Unit ->[] Unit)
+
+let rec loop = Loop (fn () => let (Loop loop) = loop in loop ())
+---
+

@@ -1,0 +1,12 @@
+==================
+ok0068_shadowCtors.fram
+==================
+data T = C
+data S = C
+
+let f (x : T) =
+  match x with
+  | C => C
+  end
+---
+

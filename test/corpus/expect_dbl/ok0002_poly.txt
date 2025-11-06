@@ -1,0 +1,22 @@
+==================
+ok0002_poly.fram
+==================
+let id = fn x => x
+let x = id id (id ())
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (lid)))
+    (def_let
+      (lid)
+      (ex_app
+        (lid)
+        (lid)
+        (ex_app
+          (lid)
+          (ctor_unit))))))

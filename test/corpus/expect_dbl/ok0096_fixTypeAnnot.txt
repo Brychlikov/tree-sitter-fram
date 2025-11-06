@@ -1,0 +1,6 @@
+==================
+ok0096_fixTypeAnnot.fram
+==================
+data rec Fix (F : type -> type) = Fix of F (Fix F)
+---
+

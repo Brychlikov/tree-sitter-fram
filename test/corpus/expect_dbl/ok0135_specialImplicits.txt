@@ -1,0 +1,10 @@
+==================
+ok0135_specialImplicits.fram
+==================
+let f {~__line__ : Int} () = ~__line__
+let g {~__file__ : String} () = ~__file__
+
+let _ = f ()
+let _ = g ()
+---
+

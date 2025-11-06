@@ -1,0 +1,26 @@
+==================
+ok0006_fnArg.fram
+==================
+let f = fn g => fn x => g x
+let x = f (fn x => x) ()
+---
+
+(source_file
+  (def_list
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (ex_fn
+          (lid)
+          (ex_app
+            (lid)
+            (lid)))))
+    (def_let
+      (lid)
+      (ex_app
+        (lid)
+        (ex_fn
+          (lid)
+          (lid))
+        (ctor_unit)))))

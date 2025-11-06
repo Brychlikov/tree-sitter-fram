@@ -1,0 +1,8 @@
+==================
+ok0069_effectCtorArg.fram
+==================
+data T (E : effect) = C of (Unit ->[E] Unit)
+
+let f {E} (C g : T E) = g
+---
+

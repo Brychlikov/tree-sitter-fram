@@ -1,0 +1,12 @@
+==================
+ok0113_pureMatchingNonrecUVar.fram
+==================
+data T = C of _
+let get (C x) = x
+
+let checkPure (f : _ -> _) = ()
+
+let _ = checkPure get
+let _ = C ()
+---
+

@@ -1,0 +1,32 @@
+==================
+ok0018_namePattern.fram
+==================
+parameter ~n
+
+let foo = fn x => ~n
+
+let _ =
+  match () with
+  | ~n => foo ()
+  end
+---
+
+(source_file
+  (def_list
+    (def_parameter
+      (fld_name
+        (tlid)))
+    (def_let
+      (lid)
+      (ex_fn
+        (lid)
+        (tlid)))
+    (def_let
+      (wildcard)
+      (ex_match
+        (ctor_unit)
+        (match_clause
+          (tlid)
+          (ex_app
+            (lid)
+            (ctor_unit)))))))
